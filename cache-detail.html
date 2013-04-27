@@ -16,26 +16,24 @@
     </head>
     <body>
         <!-- Home -->
-        <div data-role="page" id="index">
+        <div data-role="page" id="cache-detail">
             <div data-theme="a" data-role="header">
-                <h3>
+                <a data-role="button" data-direction="reverse" data-transition="slide" href="caches.html" data-icon="arrow-l" data-iconpos="left" class="ui-btn-left">
                     Geo-Searcher
+                </a>
+                <h3>
+                    Caches
                 </h3>
             </div>
             <div data-role="content">
+                <img src="https://maps.googleapis.com/maps/api/staticmap?center=Minneapolis, MN&amp;zoom=14&amp;size=288x200&amp;markers=Minneapolis, MN&amp;sensor=false" width="288" height="200">
+
                 <ul data-role="listview" data-divider-theme="b" data-inset="true">
-                    <li data-role="list-divider" role="heading">
-                        Divider
+                    <li data-theme="c">
+                        Last found on: XXX
                     </li>
                     <li data-theme="c">
-                        <a href="caches.html" data-transition="slide">
-                            Caches
-                        </a>
-                    </li>
-                    <li data-theme="c">
-                        <a href="user-settings.html" data-transition="slide">
-                            Settings
-                        </a>
+                        Difficulty: XXX
                     </li>
                 </ul>
             </div>
