@@ -109,3 +109,5 @@ UpgradeLog*.XML
 
 *.cs
 Web*config
+*.csproj
+*.sln
