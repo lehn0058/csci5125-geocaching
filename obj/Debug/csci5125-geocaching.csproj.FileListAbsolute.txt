@@ -1,5 +1,0 @@
-C:\Users\Brandon\Documents\GitHub\csci5125-geocaching\csci5125-geocaching\bin\csci5125-geocaching.dll
-C:\Users\Brandon\Documents\GitHub\csci5125-geocaching\csci5125-geocaching\bin\csci5125-geocaching.pdb
-C:\Users\Brandon\Documents\GitHub\csci5125-geocaching\csci5125-geocaching\obj\Debug\csci5125-geocaching.csprojResolveAssemblyReference.cache
-C:\Users\Brandon\Documents\GitHub\csci5125-geocaching\csci5125-geocaching\obj\Debug\csci5125-geocaching.dll
-C:\Users\Brandon\Documents\GitHub\csci5125-geocaching\csci5125-geocaching\obj\Debug\csci5125-geocaching.pdb
