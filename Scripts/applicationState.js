@@ -1,4 +1,17 @@
-﻿// Create namespace for our application state
+﻿$.enums = {
+    cacheGroups: {
+        nearYou: 0,
+        recommended: 1
+    },
+
+    difficulty: {
+        easy: { id: 0, name: "easy" },
+        normal: {id: 1, name: "normal" },
+        hard: { id: 2, name: "hard" }
+    }
+}
+
+// Create namespace for our application state
 $.applicationState = {
     // The name of the user
     userName: "John Doe",
@@ -15,12 +28,12 @@ $.applicationState = {
 
     // A few collections of of our mocked up geocache locations
     allGeocaches: [
-        { id:1, name: "My First GeoCache", group: 0 },
-        { id: 2, name: "By the pond", group: 0 },
-        { id: 3, name: "Near the forrest", group: 0 },
-        { id: 4, name: "Through the woods", group: 0 },
-        { id: 5, name: "Prairy day", group: 1 },
-        { id: 6, name: "Twins Stadium", group: 1 }
+        { id:1, name: "My First GeoCache", group: $.enums.cacheGroups.nearYou, lastFound: new Date(2012, 11, 15, 5, 0, 0, 0), difficulty: $.enums.difficulty.easy },
+        { id: 2, name: "By the pond", group: $.enums.cacheGroups.nearYou, lastFound: new Date(2013, 3, 3, 12, 0, 0, 0), difficulty: $.enums.difficulty.normal },
+        { id: 3, name: "Near the forrest", group: $.enums.cacheGroups.nearYou, lastFound: new Date(2012, 11, 15, 5, 0, 0, 0), difficulty: $.enums.difficulty.hard },
+        { id: 4, name: "Through the woods", group: $.enums.cacheGroups.nearYou, lastFound: new Date(2012, 10, 23, 5, 0, 0, 0), difficulty: $.enums.difficulty.hard },
+        { id: 5, name: "Prairy day", group: $.enums.cacheGroups.recommended, lastFound: new Date(2013, 3, 6, 20, 0, 0, 0), difficulty: $.enums.difficulty.easy },
+        { id: 6, name: "Twins Stadium", group: $.enums.cacheGroups.recommended, lastFound: new Date(2013, 2, 17, 5, 0, 0, 0), difficulty: $.enums.difficulty.easy }
     ],
 
     init: function () {
@@ -40,7 +53,7 @@ $.applicationState = {
         });
     },
 
-    // Initialized the user settings page.
+    // Initializes the user-settings.html page.
     // TODO: This is not quite working yet...
     initUserSettings: function () {
         var selectedValue;
@@ -60,6 +73,7 @@ $.applicationState = {
         //$("#user-name").text($.applicationState.);
     },
 
+    // Initializes the caches.html page
     initCaches: function () {
         // Add all geocaches to the list view in there appropriate section
         this.addSectionHeader($("#caches-collection"), "Near You");
@@ -78,8 +92,11 @@ $.applicationState = {
         });
     },
 
+    // Initializes the cache-detail.html page
     initCacheDetail: function () {
         $("#cache-name").text($.applicationState.selectedGeocache.name);
+        $("#last-found").text(this.formatDate($.applicationState.selectedGeocache.lastFound));
+        $("#difficulty").text($.applicationState.selectedGeocache.difficulty.name);
     },
 
     // Adds a section header to a list view.
@@ -94,5 +111,10 @@ $.applicationState = {
             var template = '<li data-theme="c"><a href="cache-detail.html" data-transition="slide" geo-id=' + item.id + '>' + item.name + '</a></li>';
             collectionView.append(template).listview('refresh');
         });
+    },
+
+    // Applys a display format to a date object
+    formatDate: function (date) {
+        return date.getMonth() + '/' + date.getDate() + '/' + date.getFullYear();
     }
 }
