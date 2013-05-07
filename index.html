@@ -47,28 +47,26 @@
 		   }
 		 }
 		 </script>
-        
-        <!-- Login from somewhere else than Facebook -->        
-        <div id="login">
-		   <p><button onClick="loginUser();">Login</button></p>
-		 </div>
-		 <div id="logout">
-		   <p><button  onClick="FB.logout();">Logout</button></p>
-		 </div>
-		
-		 <script>
-		   function loginUser() {    
-		     FB.login(function(response) { }, {scope:'email'});     
-		     }
-		 </script>
-        
-        
+               
         <!-- Home -->        
         <div data-role="page" id="index">
             <div data-theme="a" data-role="header">
                 <h3>
                     Geo-Searcher
                 </h3>
+                <!-- Login from somewhere else than Facebook -->        
+		        <div id="login">
+				   <p><button onClick="loginUser();">Login</button></p>
+				 </div>
+				 <div id="logout">
+				   <p><button  onClick="FB.logout();">Logout</button></p>
+				 </div>
+				
+				 <script>
+				   function loginUser() {    
+				     FB.login(function(response) { }, {scope:'email'});     
+				     }
+				 </script>
             </div>
             <div data-role="content">
                 <div>Welcome <span id="user-name">User name goes here</span></div>
