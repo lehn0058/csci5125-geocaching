@@ -16,41 +16,29 @@
     </head>
     <body>
         <!-- Home -->
-        <div data-role="page" id="cache-detail">
+        <div data-role="page" id="hints">
             <div id="cache-detail-header" data-theme="a" data-role="header">
-                <a data-role="button" data-direction="reverse" data-transition="slide" href="caches.html" data-icon="arrow-l" data-iconpos="left" class="ui-btn-left">
-                    Caches
+                <a data-role="button" data-direction="reverse" data-transition="slide" href="cache-detail.html" data-icon="arrow-l" data-iconpos="left" class="ui-btn-left">
+                    Cache Name Goes Here!
                 </a>
                 <h3 id="cache-name">
-                    Cache Name Goes Here!
+                    Hints
                 </h3>
             </div>
             <div data-role="content">
-                <img src="https://maps.googleapis.com/maps/api/staticmap?center=Minneapolis, MN&amp;zoom=14&amp;size=288x200&amp;markers=Minneapolis, MN&amp;sensor=false" width="288" height="200">
-
                 <ul data-role="listview" data-divider-theme="b" data-inset="true">
                     <li data-theme="c">
-                        Last found on: <span id="last-found">XXX</span>
+                        Hint #1
                     </li>
                     <li data-theme="c">
-                        Difficulty: <span id="difficulty">XXX</span>
+                        Hint #2
                     </li>
                     <li data-theme="c">
-                        <a href="found-by.html" data-transition="slide">
-                            Found by (<span id="found-by-count">Count</span>)
-                        </a>
-                    </li>
-                    <li data-theme="c">
-                        <a href="hints.html" data-transition="slide">
-                            Hints (<span id="hints-count">Count</span>)
-                        </a>
-                    </li>
-                    <li data-theme="c">
-                        <a href="report-problem.html" data-transition="slide">
-                            Report a problem
-                        </a>
+                        Hint #3
                     </li>
                 </ul>
+
+                <a data-role="button" href="#page1">Add a hint...</a>
             </div>
         </div>
     </body>
