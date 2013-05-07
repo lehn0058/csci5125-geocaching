@@ -43,6 +43,19 @@
 		</script>
         
         <!-- Home -->
+        <div id="login">
+		   <p><button onClick="loginUser();">Login</button></p>
+		</div>
+		<div id="logout">
+		   <p><button  onClick="FB.logout();">Logout</button></p>
+		</div>
+		
+		<script>
+		   function loginUser() {    
+		     FB.login(function(response) { }, {scope:'email'});     
+		     }
+	    </script>
+        
         <div data-role="page" id="index">
             <div data-theme="a" data-role="header">
                 <h3>
