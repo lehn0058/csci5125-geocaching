@@ -7,7 +7,7 @@
         <meta name="apple-mobile-web-app-status-bar-style" content="black" />
         <title></title>
         <link rel="stylesheet" href="https://s3.amazonaws.com/codiqa-cdn/mobile/1.2.0/jquery.mobile-1.2.0.min.css" />
-        <link rel="stylesheet" href="my.css" />
+        <!-- <link rel="stylesheet" href="my.css" /> -->
         <script src="https://s3.amazonaws.com/codiqa-cdn/jquery-1.7.2.min.js"></script>
         <script src="https://s3.amazonaws.com/codiqa-cdn/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
         <script src="Scripts/applicationState.js"></script>
@@ -20,33 +20,27 @@
     <body>
 		<div id="fb-root"></div>
 		<script>
-		  (function() {
-		    var e = document.createElement('script'); e.async = true;
-		        e.src = document.location.protocol + '//connect.facebook.net/en_US/debug.js';
-		        document.getElementById('fb-root').appendChild(e);
-		        }());
-		</script>
-        
-        <script>
 		  window.fbAsyncInit = function() {
-		    FB.init({ appId: '527684577295821', 
-		      status: true, 
-		      cookie: true,
-		      xfbml: true,
-		      oauth: true});
+		    FB.init({
+		      appId      : '527684577295821', // App ID
+		      channelUrl : '//csci5125-geocaching.azurewebsites.net//channel.html', // Channel File
+		      status     : true, // check login status
+		      cookie     : true, // enable cookies to allow the server to access the session
+		      xfbml      : true  // parse XFBML
+		    });
 		
-		      FB.Event.subscribe('auth.authResponseChange', handleResponseChange);  
-		    };
+		    FB.Event.subscribe('auth.statusChange', handleStatusChange);
+		  };
+		
+		  // Load the SDK Asynchronously
+		  (function(d){
+		     var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
+		     if (d.getElementById(id)) {return;}
+		     js = d.createElement('script'); js.id = id; js.async = true;
+		     js.src = "//connect.facebook.net/en_US/all.js";
+		     ref.parentNode.insertBefore(js, ref);
+		   }(document));
 		</script>
-        <script>
-		 function handleResponseChange(response) {
-		   document.body.className = response.authResponse ? 'connected' : 'not_connected';
-		
-		   if (response.authResponse) {
-		     console.log(response);
-		   }
-		 }
-		 </script>
                
         <!-- Home -->        
         <div data-role="page" id="index">
