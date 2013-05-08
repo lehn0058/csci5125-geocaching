@@ -40,6 +40,20 @@
 		     js.src = "//connect.facebook.net/en_US/all.js";
 		     ref.parentNode.insertBefore(js, ref);
 		   }(document));
+		  
+		  //Handle the things to do right after login
+		  function handleStatusChange(response) {
+	      document.body.className = response.authResponse ? 'connected' : 'not_connected';
+	      if (response.authResponse) {
+	        console.log(response);
+	
+	        updateUserInfo(response){
+	        	FB.api('/me', function(response) {
+	        	       &("#user-name").innerHTML = '<img src="https://graph.facebook.com/' + response.id + '/picture">' + response.name;
+	        	     });
+	        };
+	      }
+    }		  		  
 		</script>
                
         <!-- Home -->        
