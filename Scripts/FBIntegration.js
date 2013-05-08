@@ -33,5 +33,20 @@
 			  FB.api('/me', function(response) {
 			       document.getElementById('user-name').innerHTML = response.name;
 			     });
-		  }
+		  };
+		  
+		  function publishStory(){
+			  FB.ui({
+				    method: 'feed',
+				    name: 'I\'m building a social mobile web app!',
+				    caption: 'This web app is going to be awesome.',
+				    description: 'Check out Facebook\'s developer site to start building.',
+				    link: 'https://developers.facebook.com/mobile',
+				    picture: 'http://www.facebookmobileweb.com/getting-started/img/facebook_icon_large.png'
+				  }, 
+				  function(response) {
+				    console.log('publishStory response: ', response);
+				  });
+				  return false;
+		  };
 		  
