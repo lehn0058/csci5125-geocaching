@@ -49,10 +49,10 @@
 	
 	        function updateUserInfo(response){
 	        	FB.api('/me', function(response) {
-	        	       &("#user-name").innerHTML = '<img src="https://graph.facebook.com/' + response.id + '/picture">' + response.name;
+	        		document.getElementById('user-name').innerHTML = '<img src="https://graph.facebook.com/' + response.id + '/picture">' + response.name;
 	        	     });
 	        };
-	      }		  		  
+	      };		  		  
 		</script>
                
         <!-- Home -->        
