@@ -28,12 +28,12 @@ $.applicationState = {
 
     // A few collections of of our mocked up geocache locations
     allGeocaches: [
-        { id:1, name: "My First GeoCache", group: $.enums.cacheGroups.nearYou, lastFound: new Date(2012, 11, 15, 5, 0, 0, 0), difficulty: $.enums.difficulty.easy },
-        { id: 2, name: "By the pond", group: $.enums.cacheGroups.nearYou, lastFound: new Date(2013, 3, 3, 12, 0, 0, 0), difficulty: $.enums.difficulty.normal },
-        { id: 3, name: "Near the forrest", group: $.enums.cacheGroups.nearYou, lastFound: new Date(2012, 11, 15, 5, 0, 0, 0), difficulty: $.enums.difficulty.hard },
-        { id: 4, name: "Through the woods", group: $.enums.cacheGroups.nearYou, lastFound: new Date(2012, 10, 23, 5, 0, 0, 0), difficulty: $.enums.difficulty.hard },
-        { id: 5, name: "Prairy day", group: $.enums.cacheGroups.recommended, lastFound: new Date(2013, 3, 6, 20, 0, 0, 0), difficulty: $.enums.difficulty.easy },
-        { id: 6, name: "Twins Stadium", group: $.enums.cacheGroups.recommended, lastFound: new Date(2013, 2, 17, 5, 0, 0, 0), difficulty: $.enums.difficulty.easy }
+        { id: 1, name: "My First GeoCache", group: $.enums.cacheGroups.nearYou, lastFound: new Date(2012, 11, 15, 5, 0, 0, 0), difficulty: $.enums.difficulty.easy, foundBy: [{ name: "John D." }, { name: "Ellen M." }, {name: "Mike E."} ] },
+        { id: 2, name: "By the pond", group: $.enums.cacheGroups.nearYou, lastFound: new Date(2013, 3, 3, 12, 0, 0, 0), difficulty: $.enums.difficulty.normal, foundBy: [{ name: "John D." }] },
+        { id: 3, name: "Near the forrest", group: $.enums.cacheGroups.nearYou, lastFound: new Date(2012, 11, 15, 5, 0, 0, 0), difficulty: $.enums.difficulty.hard, foundBy: [{ name: "Zach Q." }, { name: "Ellorie L." }, { name: "Josh J." }, { name: "Quinton T."}] },
+        { id: 4, name: "Through the woods", group: $.enums.cacheGroups.nearYou, lastFound: new Date(2012, 10, 23, 5, 0, 0, 0), difficulty: $.enums.difficulty.hard, foundBy: [{ name: "Ellen M." }, { name: "Mike E." }] },
+        { id: 5, name: "Prairy day", group: $.enums.cacheGroups.recommended, lastFound: new Date(2013, 3, 6, 20, 0, 0, 0), difficulty: $.enums.difficulty.easy, foundBy: [{ name: "Mike E." }] },
+        { id: 6, name: "Twins Stadium", group: $.enums.cacheGroups.recommended, lastFound: new Date(2013, 2, 17, 5, 0, 0, 0), difficulty: $.enums.difficulty.easy, foundBy: [{ name: "Tony S." }, { name: "Logan W." }] }
     ],
 
     init: function () {
@@ -50,6 +50,18 @@ $.applicationState = {
 
         $('#cache-detail').live('pageinit', function (event) {
             $.applicationState.initCacheDetail();
+        });
+
+        $('#found-by').live('pageinit', function (event) {
+            $.applicationState.initFoundBy();
+        });
+
+        $('#hints').live('pageinit', function (event) {
+            $.applicationState.initHints();
+        });
+
+        $('#report-problem').live('pageinit', function (event) {
+            $.applicationState.initReportProblem();
         });
     },
 
@@ -77,9 +89,9 @@ $.applicationState = {
     initCaches: function () {
         // Add all geocaches to the list view in there appropriate section
         this.addSectionHeader($("#caches-collection"), "Near You");
-        this.addItems($("#caches-collection"), $.grep($.applicationState.allGeocaches, function (item) { return item.group == 0 }));
+        this.addSelectableItems($("#caches-collection"), $.grep($.applicationState.allGeocaches, function (item) { return item.group == 0 }));
         this.addSectionHeader($("#caches-collection"), "Recommended for you");
-        this.addItems($("#caches-collection"), $.grep($.applicationState.allGeocaches, function (item) { return item.group == 1 }));
+        this.addSelectableItems($("#caches-collection"), $.grep($.applicationState.allGeocaches, function (item) { return item.group == 1 }));
 
         // Attach an event listener to each item in the collection
         $('#caches-collection li').live('click', function () {
@@ -94,9 +106,23 @@ $.applicationState = {
 
     // Initializes the cache-detail.html page
     initCacheDetail: function () {
-        $("#cache-name").text($.applicationState.selectedGeocache.name);
+        $("#cache-name").text(this.selectedGeocache.name);
         $("#last-found").text(this.formatDate($.applicationState.selectedGeocache.lastFound));
         $("#difficulty").text($.applicationState.selectedGeocache.difficulty.name);
+        $("#found-by-count").text($.applicationState.selectedGeocache.foundBy.length)
+    },
+
+    initFoundBy: function () {
+        this.addItems($("#found-by-collection"), this.selectedGeocache.foundBy);
+        $("#back-button-text").text(this.selectedGeocache.name);
+    },
+
+    initHints: function () {
+        $("#back-button-text").text(this.selectedGeocache.name);
+    },
+
+    initReportProblem: function () {
+        $("#back-button-text").text(this.selectedGeocache.name);
     },
 
     // Adds a section header to a list view.
@@ -105,10 +131,18 @@ $.applicationState = {
         collectionView.append(template);
     },
 
-    // Adds a collection of items to a list view.
-    addItems: function (collectionView, items) {
+    // Adds a collection of items to a list view. These items are selectable.
+    addSelectableItems: function (collectionView, items) {
         $.each(items, function (index, item) {
             var template = '<li data-theme="c"><a href="cache-detail.html" data-transition="slide" geo-id=' + item.id + '>' + item.name + '</a></li>';
+            collectionView.append(template).listview('refresh');
+        });
+    },
+
+    // Adds a collection of items to a list view. These items are NOT selectable.
+    addItems: function (collectionView, items) {
+        $.each(items, function (index, item) {
+            var template = '<li data-theme="c">' + item.name + '</li>';
             collectionView.append(template).listview('refresh');
         });
     },
