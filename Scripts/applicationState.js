@@ -104,7 +104,6 @@ $.applicationState = {
     // Initializes the user-settings.html page.
     // TODO: This is not quite working yet...
     initUserSettings: function () {
-         alert("Hey!");
         var selectedValue;
         if ($.applicationState.settings.normal) {
             selectedValue = "on";
