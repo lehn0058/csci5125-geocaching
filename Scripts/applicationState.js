@@ -8,6 +8,11 @@
         easy: { id: 0, name: "easy" },
         normal: {id: 1, name: "normal" },
         hard: { id: 2, name: "hard" }
+    },
+    
+    eventCategories: {
+        appliedByMe: 0,
+        appliedByOthers: 1
     }
 }
 
@@ -18,6 +23,9 @@ $.applicationState = {
     
     // The current geocache that a user has selected. Defaults to null since a user doesn't initially have one selected.
     selectedGeocache: null,
+
+// The current reservation that a user has selected. Defaults to null since a user doesn't initially have one selected.
+    selectedReservation: null,
 
     // Filters related to what caches should be displayed
     settings: {
@@ -36,6 +44,17 @@ $.applicationState = {
         { id: 6, name: "Twins Stadium", group: $.enums.cacheGroups.recommended, lastFound: new Date(2013, 2, 17, 5, 0, 0, 0), difficulty: $.enums.difficulty.easy, foundBy: [{ name: "Tony S." }, { name: "Logan W." }], hints: [{ name: "Don't look for this one just before a game. You end up getting a lot of funny looks." }, { name: "I kept looking right next to the statue, but that is not where it is." }] }
     ],
 
+
+// A few collections of our mocked up reservations
+    allReservations: [
+        { id: 1, applicant: "John Doe", group: $.enums.eventCategories.appliedByMe, cachingDate: new Date(2013, 6, 6, 8, 0, 0, 0), difficulty: $.enums.difficulty.hard, equimentsSupport: [{ name: "Magellan CX0310SGXNA eXplorist 310 Waterproof Hiking GPS" }, { name: "Cache Advance Magnetic Bolt" }, { name: "Garmin nüvi 1300T GPS Navigation System" }], foodSupport: [{ name: "Cookies"},{ name: "Bread"},{ name: "AppleJuice"} ], contact: "6122345612" },
+        { id: 2, applicant: "John Doe", group: $.enums.eventCategories.appliedByMe, cachingDate: new Date(2013, 7, 1, 12, 0, 0, 0), difficulty: $.enums.difficulty.normal, equimentsSupport: [{ name: "Garmin nüvi 1300T GPS Navigation System" }], foodSupport: [{ name: "OrangeJuice" },{ name: "ChickenWings" }], contact: "6122345612" },
+        { id: 3, applicant: "John Doe", group: $.enums.eventCategories.appliedByMe, cachingDate: new Date(2013, 5, 31, 9, 0, 0, 0), difficulty: $.enums.difficulty.hard, equimentsSupport: [{ name: "Cache Advance Magnetic Bolt" }, { name: "Cache Advance Magnetic Vehicle Travel Bug" }, { name: "Lowrance Endura Outback Gps" }], foodSupport: [{ name: "AppleJuice" },{ name: "Sandwich" }] , contact: "6122345612"},
+        { id: 4, applicant: "Divid", group: $.enums.eventCategories.appliedByOthers, cachingDate: new Date(2013, 10, 19, 10, 0, 0, 0), difficulty: $.enums.difficulty.easy, equimentsSupport: [{ name: "Lowrance Endura Outback Gps" }], foodSupport: [{ name: "OrangeJuice" }], contact: "2119087761" },
+        { id: 5, applicant: "Jessica", group: $.enums.eventCategories.appliedByOthers, cachingDate: new Date(2013, 5, 22, 14, 0, 0, 0), difficulty: $.enums.difficulty.easy, equimentsSupport: [{ name: "Cache Angel Geocoin - The Seeker - Antique Silver" }], foodSupport: [{ name: "Sandwich" }, { name: "Cookies" }] , contact: "803712467"}
+    ],
+
+
     init: function () {
         // Set the user-name for the current user
         $("#user-name").text($.applicationState.userName);
@@ -43,6 +62,22 @@ $.applicationState = {
         //Allen changed live() method to on() method to stick to jQuery's recommendation 
         $('#user-settings').live('pageinit', function (event) {
             $.applicationState.initUserSettings();
+        });
+        
+        $('#user-reservations').live('pageinit', function (event) {
+            $.applicationState.initUserReservations();
+        });
+
+       $('#reservation-detail').live('pageinit', function (event) {
+            $.applicationState.initReservationDetail();
+        });
+
+       $('#sponsored-equipments').live('pageinit', function (event) {
+            $.applicationState.initSpEquipments();
+        });
+
+        $('#sponsored-food').live('pageinit', function (event) {
+            $.applicationState.initSpFood();
         });
 
         $('#caches').live('pageinit', function (event) {
@@ -85,6 +120,47 @@ $.applicationState = {
         // Set the user-name for the current user
         //$("#user-name").text($.applicationState.);
     },
+
+    // Initialize the user-resverations.html page
+    initUserReservations(): function () {
+            // Add all reservations to the list view in their appropriate section
+        this.addSectionHeader($("#reservations-collection"), "Applied by Me");
+        this.addSelectableItems2($("#reservations-collection"), $.grep($.applicationState.allReservations, function (item) { return item.group == 0 }));
+        this.addSectionHeader($("#reservations-collection"), "Applied by Others");
+        this.addSelectableItems($("#reservations-collection"), $.grep($.applicationState.allReservations, function (item) { return item.group == 1 }));
+
+        // Attach an event listener to each item in the collection
+        $('#reservations-collection li').on('click', function () {
+            var id = $("a", this).attr("res-id");
+            if (id) {
+                var idInt = parseInt(id);
+                var item = $.grep($.applicationState.allReservations, function (item, index) { return item.id == idInt; })[0];
+                $.applicationState.selectedReservation= item;
+            }
+        });
+    },
+
+// Initializes the reservation-detail.html page
+    initReservationDetail: function () {
+        $("#applicant-name").text(this.selectedReservation.applicant);
+        $("#caching-date").text(this.formatDate($.applicationState.selectedReservation.cachingDate));
+        $("#difficulty").text(this.selectedReservation.difficulty.name);
+        $("#sponsored-equiments-count").text(this.selectedReservation.equimentsSupport.length);
+        $("#sponsored-food-count").text(this.selectedReservation.foodSupport.length);
+ $("#contact-info").text(this.selectedReservation.contact);
+    },
+
+    initSpEquipments: function () {
+        this.addItems($("#sponsored-equiments-list"), this.selectedReservation.equimentsSupport);
+        $("#back-button-text").text("Event by " + this.selectedReservation.applicant);
+    },
+
+    initSpFood: function () {
+        $("#back-button-text").text("Event by " + this.selectedReservation.applicant);
+        this.addItems($("#sponsored-food-list"), this.selectedReservation.foodSupport)
+    },
+
+
 
     // Initializes the caches.html page
     initCaches: function () {
@@ -143,10 +219,19 @@ $.applicationState = {
         collectionView.append(template);
     },
 
-    // Adds a collection of items to a list view. These items are selectable.
+    // Adds a collection of items to a list view(caching list). These items are selectable.
     addSelectableItems: function (collectionView, items) {
         $.each(items, function (index, item) {
             var template = '<li data-theme="c"><a href="cache-detail.html" data-transition="slide" geo-id=' + item.id + '>' + item.name + '</a></li>';
+            collectionView.append(template).listview('refresh');
+        });
+    },
+
+
+ // Adds a collection of items to a list view(reservation list). These items are selectable.
+    addSelectableItems2: function (collectionView, items) {
+        $.each(items, function (index, item) {
+            var template = '<li data-theme="c"><a href="reservation-detail.html" data-transition="slide" res-id=' + item.id + '>' + item.applicant+ '   ' +formatDate(item.date)+ '</a></li>';
             collectionView.append(template).listview('refresh');
         });
     },
