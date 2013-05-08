@@ -146,7 +146,7 @@ $.applicationState = {
         $("#applicant-name").text(this.selectedReservation.applicant);
         $("#caching-date").text(this.formatDate($.applicationState.selectedReservation.cachingDate));
         $("#difficulty").text(this.selectedReservation.difficulty.name);
-        $("#sponsored-equipments-count").text(this.selectedReservation.equimentsSupport.length);
+        $("#sponsored-equipments-count").text(this.selectedReservation.equipmentsSupport.length);
         $("#sponsored-food-count").text(this.selectedReservation.foodSupport.length);
         $("#contact-info").text(this.selectedReservation.contact);
     },
