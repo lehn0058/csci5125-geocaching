@@ -104,6 +104,7 @@ $.applicationState = {
     // Initializes the user-settings.html page.
     // TODO: This is not quite working yet...
     initUserSettings: function () {
+         alert("Hey!");
         var selectedValue;
         if ($.applicationState.settings.normal) {
             selectedValue = "on";
@@ -123,7 +124,7 @@ $.applicationState = {
 
     // Initialize the user-resverations.html page
     initUserReservations(): function () {
-        alert("Hey!");
+       
             // Add all reservations to the list view in their appropriate section
         this.addSectionHeader($("#reservations-collection"), "Applied by Me");
         this.addSelectableItems2($("#reservations-collection"), $.grep($.applicationState.allReservations, function (item) { return item.group == 0 }));
