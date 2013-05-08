@@ -47,13 +47,16 @@
 		      if (response.authResponse) {
 		        console.log(response);
 		
-		        function updateUserInfo(response){
-		        	FB.api('/me', function(response) {
-		        		document.getElementById('user-name').innerHTML = '<img src="https://graph.facebook.com/' + response.id + '/picture">' + response.name;
-		        	     });
-		        };
+		        updateUserInfo(response);
 		      };
 		  };
+		  
+		  function updateUserInfo(response) {
+			  FB.api('/me', function(response) {
+			       document.getElementById('user-info').innerHTML = '<img src="https://graph.facebook.com/' + response.id + '/picture">' + response.name;
+			     });
+		  }
+		  
 		</script>
                
         <!-- Home -->        
