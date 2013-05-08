@@ -52,7 +52,7 @@ $.applicationState = {
         { id: 3, applicant: "John Doe", group: $.enums.eventCategories.appliedByMe, cachingDate: new Date(2013, 5, 31, 9, 0, 0, 0), difficulty: $.enums.difficulty.hard, equimentsSupport: [{ name: "Cache Advance Magnetic Bolt" }, { name: "Cache Advance Magnetic Vehicle Travel Bug" }, { name: "Lowrance Endura Outback Gps" }], foodSupport: [{ name: "AppleJuice" },{ name: "Sandwich" }] , contact: "6122345612"},
         { id: 4, applicant: "Divid", group: $.enums.eventCategories.appliedByOthers, cachingDate: new Date(2013, 10, 19, 10, 0, 0, 0), difficulty: $.enums.difficulty.easy, equimentsSupport: [{ name: "Lowrance Endura Outback Gps" }], foodSupport: [{ name: "OrangeJuice" }], contact: "2119087761" },
         { id: 5, applicant: "Jessica", group: $.enums.eventCategories.appliedByOthers, cachingDate: new Date(2013, 5, 22, 14, 0, 0, 0), difficulty: $.enums.difficulty.easy, equimentsSupport: [{ name: "Cache Angel Geocoin - The Seeker - Antique Silver" }], foodSupport: [{ name: "Sandwich" }, { name: "Cookies" }] , contact: "803712467"}
-    ]
+    ],
 
 
     init: function () {
@@ -122,7 +122,7 @@ $.applicationState = {
     },
 
     // Initialize the user-resverations.html page
-    initUserReservations(): function () {
+    initUserReservations: function () {
        
             // Add all reservations to the list view in their appropriate section
         this.addSectionHeader($("#reservations-collection"), "Applied by Me");
