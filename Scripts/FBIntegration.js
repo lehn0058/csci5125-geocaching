@@ -38,9 +38,9 @@
 		  function publishStory(){
 			  FB.ui({
 				    method: 'feed',
-				    name: 'I\'m building a social mobile web app!',
-				    caption: 'This web app is going to be awesome.',
-				    description: 'Check out Facebook\'s developer site to start building.',
+				    name: 'I found a secret Geocache on U of M campus!',
+				    caption: 'Join University Geocachers to search for Geocaches at every corner on campus!s',
+				    description: 'Geocaching is a global real-world treasure hunting game. Joining University Geocahers Assocation, you will enjoy the serendipity of treasure hunting with you fellow schoolmates.',
 				    link: 'https://developers.facebook.com/mobile',
 				    picture: 'http://www.facebookmobileweb.com/getting-started/img/facebook_icon_large.png'
 				  }, 
