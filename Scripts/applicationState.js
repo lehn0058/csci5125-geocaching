@@ -28,12 +28,12 @@ $.applicationState = {
 
     // A few collections of our mocked up geocache locations
     allGeocaches: [
-        { id: 1, name: "My First GeoCache", group: $.enums.cacheGroups.nearYou, lastFound: new Date(2012, 11, 15, 5, 0, 0, 0), difficulty: $.enums.difficulty.easy, foundBy: [{ name: "John D." }, { name: "Ellen M." }, {name: "Mike E."} ] },
-        { id: 2, name: "By the pond", group: $.enums.cacheGroups.nearYou, lastFound: new Date(2013, 3, 3, 12, 0, 0, 0), difficulty: $.enums.difficulty.normal, foundBy: [{ name: "John D." }] },
-        { id: 3, name: "Near the forrest", group: $.enums.cacheGroups.nearYou, lastFound: new Date(2012, 11, 15, 5, 0, 0, 0), difficulty: $.enums.difficulty.hard, foundBy: [{ name: "Zach Q." }, { name: "Ellorie L." }, { name: "Josh J." }, { name: "Quinton T."}] },
-        { id: 4, name: "Through the woods", group: $.enums.cacheGroups.nearYou, lastFound: new Date(2012, 10, 23, 5, 0, 0, 0), difficulty: $.enums.difficulty.hard, foundBy: [{ name: "Ellen M." }, { name: "Mike E." }] },
-        { id: 5, name: "Prairy day", group: $.enums.cacheGroups.recommended, lastFound: new Date(2013, 3, 6, 20, 0, 0, 0), difficulty: $.enums.difficulty.easy, foundBy: [{ name: "Mike E." }] },
-        { id: 6, name: "Twins Stadium", group: $.enums.cacheGroups.recommended, lastFound: new Date(2013, 2, 17, 5, 0, 0, 0), difficulty: $.enums.difficulty.easy, foundBy: [{ name: "Tony S." }, { name: "Logan W." }] }
+        { id: 1, name: "My First GeoCache", group: $.enums.cacheGroups.nearYou, lastFound: new Date(2012, 11, 15, 5, 0, 0, 0), difficulty: $.enums.difficulty.easy, foundBy: [{ name: "John D." }, { name: "Ellen M." }, { name: "Mike E." }], hints: [{ name: "Make sure to look closely at all the leaves."} ] },
+        { id: 2, name: "By the pond", group: $.enums.cacheGroups.nearYou, lastFound: new Date(2013, 3, 3, 12, 0, 0, 0), difficulty: $.enums.difficulty.normal, foundBy: [{ name: "John D." }], hints: [{ name: "This one should probably be a tiny size instead of a small. I was not looking close enough at first." }] },
+        { id: 3, name: "Near the forrest", group: $.enums.cacheGroups.nearYou, lastFound: new Date(2012, 11, 15, 5, 0, 0, 0), difficulty: $.enums.difficulty.hard, foundBy: [{ name: "Zach Q." }, { name: "Ellorie L." }, { name: "Josh J." }, { name: "Quinton T." }], hints: [{ name: "Look near the trees, but NOT in them." }] },
+        { id: 4, name: "Through the woods", group: $.enums.cacheGroups.nearYou, lastFound: new Date(2012, 10, 23, 5, 0, 0, 0), difficulty: $.enums.difficulty.hard, foundBy: [{ name: "Ellen M." }, { name: "Mike E." }], hints: [{ name: "Going with someone tall makes this one much easier." }] },
+        { id: 5, name: "Prairy day", group: $.enums.cacheGroups.recommended, lastFound: new Date(2013, 3, 6, 20, 0, 0, 0), difficulty: $.enums.difficulty.easy, foundBy: [{ name: "Mike E." }], hints: [{ name: "Think wet... Very wet..." }] },
+        { id: 6, name: "Twins Stadium", group: $.enums.cacheGroups.recommended, lastFound: new Date(2013, 2, 17, 5, 0, 0, 0), difficulty: $.enums.difficulty.easy, foundBy: [{ name: "Tony S." }, { name: "Logan W." }], hints: [{ name: "Don't look for this one just before a game. You end up getting a lot of funny looks." }, { name: "I kept looking right next to the statue, but that is not where it is." }] }
     ],
 
     init: function () {
@@ -109,8 +109,9 @@ $.applicationState = {
     initCacheDetail: function () {
         $("#cache-name").text(this.selectedGeocache.name);
         $("#last-found").text(this.formatDate($.applicationState.selectedGeocache.lastFound));
-        $("#difficulty").text($.applicationState.selectedGeocache.difficulty.name);
-        $("#found-by-count").text($.applicationState.selectedGeocache.foundBy.length)
+        $("#difficulty").text(this.selectedGeocache.difficulty.name);
+        $("#found-by-count").text(this.selectedGeocache.foundBy.length)
+        $("#hints-count").text(this.selectedGeocache.hints.length)
     },
 
     initFoundBy: function () {
@@ -120,6 +121,16 @@ $.applicationState = {
 
     initHints: function () {
         $("#back-button-text").text(this.selectedGeocache.name);
+        this.addItems($("#hints-collection"), this.selectedGeocache.hints);
+
+        $("#add-hint-button").click(function () {
+            var inputText = $("#add-hint-text-area").val();
+            $("#add-hint-text-area").val("");
+            $.applicationState.selectedGeocache.hints.push({ name: inputText });
+
+            // Refresh the list view
+            $.applicationState.addItems($("#hints-collection"), $.applicationState.selectedGeocache.hints);
+        });
     },
 
     initReportProblem: function () {
@@ -142,6 +153,10 @@ $.applicationState = {
 
     // Adds a collection of items to a list view. These items are NOT selectable.
     addItems: function (collectionView, items) {
+        // Clear out any existing child nodes.
+        collectionView.empty();
+
+        // Add each item as a child node of the collection view.
         $.each(items, function (index, item) {
             var template = '<li data-theme="c">' + item.name + '</li>';
             collectionView.append(template).listview('refresh');

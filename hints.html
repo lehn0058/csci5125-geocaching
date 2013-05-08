@@ -26,19 +26,13 @@
                 </h3>
             </div>
             <div data-role="content">
-                <ul data-role="listview" data-divider-theme="b" data-inset="true">
-                    <li data-theme="c">
-                        Hint #1
-                    </li>
-                    <li data-theme="c">
-                        Hint #2
-                    </li>
-                    <li data-theme="c">
-                        Hint #3
-                    </li>
+                <ul id="hints-collection" data-role="listview" data-divider-theme="b" data-inset="true">
                 </ul>
 
-                <a data-role="button" href="#page1">Add a hint...</a>
+                <div data-role="fieldcontain">
+                    <textarea style="width:100%" id="add-hint-text-area" placeholder="Hint text..."></textarea>
+                </div>
+                <a data-role="button" id="add-hint-button">Add Hint</a>
             </div>
         </div>
     </body>
