@@ -153,7 +153,7 @@ $.applicationState = {
 
     initSpEquipments: function () {
         $("#back-button-text").text("Event by " + this.selectedReservation.applicant);
-        this.addItems($("#sponsored-equiments-list"), this.selectedReservation.equipmentsSupport);
+        this.addItems($("#sponsored-equipments-list"), this.selectedReservation.equipmentsSupport);
     },
 
     initSpFood: function () {
