@@ -152,8 +152,8 @@ $.applicationState = {
     },
 
     initSpEquipments: function () {
-        this.addItems($("#sponsored-equiments-list"), this.selectedReservation.equimentsSupport);
         $("#back-button-text").text("Event by " + this.selectedReservation.applicant);
+        this.addItems($("#sponsored-equiments-list"), this.selectedReservation.equimentsSupport);
     },
 
     initSpFood: function () {
