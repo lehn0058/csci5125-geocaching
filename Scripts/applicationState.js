@@ -45,7 +45,7 @@ $.applicationState = {
     ],
 
 
-// A few collections of our mocked up reservations
+    // A few collections of our mocked up reservations
     allReservations: [
         { id: 1, applicant: "John Doe", group: $.enums.eventCategories.appliedByMe, cachingDate: new Date(2013, 6, 6, 8, 0, 0, 0), difficulty: $.enums.difficulty.hard, equimentsSupport: [{ name: "Magellan CX0310SGXNA eXplorist 310 Waterproof Hiking GPS" }, { name: "Cache Advance Magnetic Bolt" }, { name: "Garmin nüvi 1300T GPS Navigation System" }], foodSupport: [{ name: "Cookies"},{ name: "Bread"},{ name: "AppleJuice"} ], contact: "6122345612" },
         { id: 2, applicant: "John Doe", group: $.enums.eventCategories.appliedByMe, cachingDate: new Date(2013, 7, 1, 12, 0, 0, 0), difficulty: $.enums.difficulty.normal, equimentsSupport: [{ name: "Garmin nüvi 1300T GPS Navigation System" }], foodSupport: [{ name: "OrangeJuice" },{ name: "ChickenWings" }], contact: "6122345612" },
@@ -127,7 +127,7 @@ $.applicationState = {
         this.addSectionHeader($("#reservations-collection"), "Applied by Me");
         this.addSelectableItems2($("#reservations-collection"), $.grep($.applicationState.allReservations, function (item) { return item.group == 0 }));
         this.addSectionHeader($("#reservations-collection"), "Applied by Others");
-        this.addSelectableItems($("#reservations-collection"), $.grep($.applicationState.allReservations, function (item) { return item.group == 1 }));
+        this.addSelectableItems2($("#reservations-collection"), $.grep($.applicationState.allReservations, function (item) { return item.group == 1 }));
 
         // Attach an event listener to each item in the collection
         $('#reservations-collection li').on('click', function () {
