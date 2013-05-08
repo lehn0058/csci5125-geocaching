@@ -231,7 +231,7 @@ $.applicationState = {
  // Adds a collection of items to a list view(reservation list). These items are selectable.
     addSelectableItems2: function (collectionView, items) {
         $.each(items, function (index, item) {
-            var template = '<li data-theme="c"><a href="reservation-detail.html" data-transition="slide" res-id=' + item.id + '>' + item.applicant+ '   ' +formatDate(item.date)+ '</a></li>';
+            var template = '<li data-theme="c"><a href="reservation-detail.html" data-transition="slide" res-id=' + item.id + '>' + item.applicant + '</a></li>';
             collectionView.append(template).listview('refresh');
         });
     },
