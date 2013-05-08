@@ -68,11 +68,11 @@ $.applicationState = {
             $.applicationState.initUserReservations();
         });
 
-       $('#reservation-detail').live('pageinit', function (event) {
+        $('#reservation-detail').live('pageinit', function (event) {
             $.applicationState.initReservationDetail();
         });
 
-       $('#sponsored-equipments').live('pageinit', function (event) {
+        $('#sponsored-equipments').live('pageinit', function (event) {
             $.applicationState.initSpEquipments();
         });
 
@@ -123,6 +123,7 @@ $.applicationState = {
 
     // Initialize the user-resverations.html page
     initUserReservations(): function () {
+        alert("Hey!");
             // Add all reservations to the list view in their appropriate section
         this.addSectionHeader($("#reservations-collection"), "Applied by Me");
         this.addSelectableItems2($("#reservations-collection"), $.grep($.applicationState.allReservations, function (item) { return item.group == 0 }));
