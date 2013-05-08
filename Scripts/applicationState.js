@@ -41,15 +41,15 @@ $.applicationState = {
         $("#user-name").text($.applicationState.userName);
 
         //Allen changed live() method to on() method to stick to jQuery's recommendation 
-        $('#user-settings').on('pageinit', function (event) {
+        $('#user-settings').live('pageinit', function (event) {
             $.applicationState.initUserSettings();
         });
 
-        $('#caches').on('pageinit', function (event) {
+        $('#caches').live('pageinit', function (event) {
             $.applicationState.initCaches();
         });
 
-        $('#cache-detail').on('pageinit', function (event) {
+        $('#cache-detail').live('pageinit', function (event) {
             $.applicationState.initCacheDetail();
         });
 
