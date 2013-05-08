@@ -26,7 +26,7 @@ $.applicationState = {
         hard: true
     },
 
-    // A few collections of of our mocked up geocache locations
+    // A few collections of our mocked up geocache locations
     allGeocaches: [
         { id: 1, name: "My First GeoCache", group: $.enums.cacheGroups.nearYou, lastFound: new Date(2012, 11, 15, 5, 0, 0, 0), difficulty: $.enums.difficulty.easy, foundBy: [{ name: "John D." }, { name: "Ellen M." }, {name: "Mike E."} ] },
         { id: 2, name: "By the pond", group: $.enums.cacheGroups.nearYou, lastFound: new Date(2013, 3, 3, 12, 0, 0, 0), difficulty: $.enums.difficulty.normal, foundBy: [{ name: "John D." }] },
@@ -40,15 +40,16 @@ $.applicationState = {
         // Set the user-name for the current user
         $("#user-name").text($.applicationState.userName);
 
-        $('#user-settings').live('pageinit', function (event) {
+        //Allen changed live() method to on() method to stick to jQuery's recommendation 
+        $('#user-settings').on('pageinit', function (event) {
             $.applicationState.initUserSettings();
         });
 
-        $('#caches').live('pageinit', function (event) {
+        $('#caches').on('pageinit', function (event) {
             $.applicationState.initCaches();
         });
 
-        $('#cache-detail').live('pageinit', function (event) {
+        $('#cache-detail').on('pageinit', function (event) {
             $.applicationState.initCacheDetail();
         });
 
@@ -87,14 +88,14 @@ $.applicationState = {
 
     // Initializes the caches.html page
     initCaches: function () {
-        // Add all geocaches to the list view in there appropriate section
+        // Add all geocaches to the list view in their appropriate section
         this.addSectionHeader($("#caches-collection"), "Near You");
         this.addSelectableItems($("#caches-collection"), $.grep($.applicationState.allGeocaches, function (item) { return item.group == 0 }));
         this.addSectionHeader($("#caches-collection"), "Recommended for you");
         this.addSelectableItems($("#caches-collection"), $.grep($.applicationState.allGeocaches, function (item) { return item.group == 1 }));
 
         // Attach an event listener to each item in the collection
-        $('#caches-collection li').live('click', function () {
+        $('#caches-collection li').on('click', function () {
             var id = $("a", this).attr("geo-id");
             if (id) {
                 var idInt = parseInt(id);
