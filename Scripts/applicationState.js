@@ -318,7 +318,7 @@ $.applicationState = {
                 //$("#current-lon").text($.applicationState.trimDecimal(position.coords.longitude));
 
                 // Update the distance between the user's current position and the geocache
-                $("#distance").text(distanceBetweenCoordinates(position.coords.latitude, position.coords.longitude, $.applicationState.selectedGeocache.lat, $.applicationState.selectedGeocache.lon));
+                $("#distance").text($.applicationState.distanceBetweenCoordinates(position.coords.latitude, position.coords.longitude, $.applicationState.selectedGeocache.lat, $.applicationState.selectedGeocache.lon));
             });
         }
         else {
