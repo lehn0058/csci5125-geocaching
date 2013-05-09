@@ -224,6 +224,7 @@ $.applicationState = {
         $("#target-lon").text(this.selectedGeocache.lon);
 
         this.startTrackPosition();
+        this.drawCompass();
     },
 
     // Adds a section header to a list view.
@@ -271,8 +272,8 @@ $.applicationState = {
         if (navigator.geolocation) {
             navigator.geolocation.watchPosition(function (position) {
                 // Update the user's position
-                $("#current-lat").text(position.coords.latitude);
-                $("#current-lon").text(position.coords.longitude);
+                $("#current-lat").text($.applicationState.trimDecimal(position.coords.latitude));
+                $("#current-lon").text($.applicationState.trimDecimal(position.coords.longitude));
 
                 // Update the distance between the user's current position and the geocache
                 $("#distance").text($.applicationState.distanceBetweenCoordinates(position.coords.latitude, position.coords.longitude, $.applicationState.selectedGeocache.lat, $.applicationState.selectedGeocache.lon));
@@ -297,11 +298,65 @@ $.applicationState = {
         var d = R * c;
 
         // Return the distance, in miles, with 2 decimal places.
-        return Math.floor(d * 100) / 100
+        return this.trimDecimal(d);
+    },
+
+    // Trims a decimal number so it only has 2 decimal places.
+    trimDecimal : function (decimal) {
+        return Math.floor(decimal * 100) / 100
     },
 
     // Converts degrees to radians
     toRadians: function (degrees) {
         return degrees * Math.PI / 180
+    },
+
+    drawCompass: function () {
+        //var compass = document.body.appendChild(document.createElement('article'));
+        var compass = document.getElementById('compass').appendChild(document.createElement('article'));;
+        compass.id = 'compass';
+        var spinner = compass.appendChild(document.createElement('article'));
+        spinner.id = 'spinner';
+        var pin = spinner.appendChild(document.createElement('article'));
+        pin.id = 'pin';
+
+        for (var degrees = 0, degree; degrees < 360; degrees += 30) {
+            degree = spinner.appendChild(document.createElement('label'));
+            degree.className = 'degree';
+            degree.innerText = degrees;
+            degree.style.webkitTransform = 'rotateZ(' + degrees + 'deg)'
+        }
+        ['N', 'NE', 'E', 'SE', 'S', 'SW', 'W', 'NW'].forEach(function (label, index) {
+            var main = ((index % 2) ? '' : ' main');
+            point = spinner.appendChild(document.createElement('label'));
+            point.className = 'point' + main;
+            point.innerText = label;
+            point.style.webkitTransform = 'rotateZ(' + (index * 45) + 'deg)'
+            arrow = spinner.appendChild(document.createElement('div'));
+            arrow.className = 'arrow' + main;
+            arrow.style.webkitTransform = 'rotateZ(' + (index * 45) + 'deg)'
+        });
+
+        var lastHeading = 0;
+        window.addEventListener('deviceorientation', function (e) {
+            var heading = e.webkitCompassHeading + window.orientation;
+            if (Math.abs(heading - lastHeading) < 180) {
+                spinner.style.webkitTransition = 'all 0.2s ease-in-out';
+            } else {
+                spinner.style.webkitTransition = 'none';
+            }
+            spinner.style.webkitTransform = 'rotateZ(-' + heading + 'deg)';
+            lastHeading = heading;
+        }, false);
+
+        document.body.addEventListener('touchstart', function (e) {
+            e.preventDefault();
+        }, false);
+
+        window.addEventListener('orientationchange', function (e) {
+            window.scrollTo(0, 1);
+        }, false);
+
+        setTimeout(function () { window.scrollTo(0, 1); }, 0);
     }
 }
