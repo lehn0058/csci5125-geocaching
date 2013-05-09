@@ -185,9 +185,10 @@ $.applicationState = {
         $("#register-GC-button").click(function () {
             var newRegisterNum = parseInt($("#register-count").val()) + 1;
             $.applicationState.selectedGCReservation.registerNum = newRegisterNum;
-
+            alert("Can you see?");
             // Refresh the detail
-            $("#register-count").text(this.selectedGCReservation.registerNum);
+            //$("#register-count").text(this.selectedGCReservation.registerNum);
+            $("#register-count").text("10000");
         });
     },
 
