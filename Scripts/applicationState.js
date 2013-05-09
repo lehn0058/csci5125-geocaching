@@ -59,11 +59,11 @@ $.applicationState = {
 
     // A few collections of our mocked up regReservations
     allRegReservations: [
-        { id: 1, organizer: "John Doe", group: $.enums.eventCategories.appliedByMe, date: new Date(2013, 6, 1, 8, 0, 0, 0), location: "Wilson Park, Philadelphia, PA", theme: "public lecture", contact: "6122345612" },
-        { id: 2, organizer: "John Doe", group: $.enums.eventCategories.appliedByMe, date: new Date(2013, 6, 8, 10, 0, 0, 0), location: "El Taller Del Alfarero Center, 14521 South Normandie AvenueGardena, CA", theme: "happy weekend dinner", contact: "6122345612" },
-        { id: 3, organizer: "John Doe", group: $.enums.eventCategories.appliedByMe, date: new Date(2013, 7, 1, 10, 0, 0, 0), location: "Chianti Grill, 2050 N Snelling Ave, Roseville, MN", theme: "annual geocaching meeting for local group", contact: "6122345612"},
-        { id: 4, organizer: "Divid", group: $.enums.eventCategories.appliedByOthers, date: new Date(2013, 7, 2, 9, 30, 0, 0), location: "New York University, 44 W 4th St(between Greene St & Mercer St) New York, NY ", theme: "national geocaching knowledge competition", contact: "2119087761" },
-        { id: 5, organizer: "Jessica", group: $.enums.eventCategories.appliedByOthers, date: new Date(2013, 5, 22, 14, 30, 0, 0), location: "The Original Valentino's, 33497 S Dixie Hwy Unit 105 Florida City, FL  ", theme: "local flee market activity for geocaching device ", contact: "803712467"}
+        { id: 1, organizer: "John Doe", group: $.enums.eventCategories.appliedByMe, date: new Date(2013, 6, 1, 8, 0, 0, 0), locating: "Wilson Park, Philadelphia, PA", theme: "public lecture", contact: "6122345612" },
+        { id: 2, organizer: "John Doe", group: $.enums.eventCategories.appliedByMe, date: new Date(2013, 6, 8, 10, 0, 0, 0), locating: "El Taller Del Alfarero Center, 14521 South Normandie AvenueGardena, CA", theme: "happy weekend dinner", contact: "6122345612" },
+        { id: 3, organizer: "John Doe", group: $.enums.eventCategories.appliedByMe, date: new Date(2013, 7, 1, 10, 0, 0, 0), locating: "Chianti Grill, 2050 N Snelling Ave, Roseville, MN", theme: "annual geocaching meeting for local group", contact: "6122345612"},
+        { id: 4, organizer: "Divid", group: $.enums.eventCategories.appliedByOthers, date: new Date(2013, 7, 2, 9, 30, 0, 0), locating: "New York University, 44 W 4th St(between Greene St & Mercer St) New York, NY ", theme: "national geocaching knowledge competition", contact: "2119087761" },
+        { id: 5, organizer: "Jessica", group: $.enums.eventCategories.appliedByOthers, date: new Date(2013, 5, 22, 14, 30, 0, 0), locating: "The Original Valentino's, 33497 S Dixie Hwy Unit 105 Florida City, FL  ", theme: "local flee market activity for geocaching device ", contact: "803712467"}
     ],
 
 
@@ -80,8 +80,12 @@ $.applicationState = {
             $.applicationState.initUserReservations();
         });
 
-        $('#reservation-detail').live('pageinit', function (event) {
-            $.applicationState.initReservationDetail();
+        $('#gcReservation-detail').live('pageinit', function (event) {
+            $.applicationState.initGCReservationDetail();
+        });
+        
+        $('#regReservation-detail').live('pageinit', function (event) {
+            $.applicationState.initRegReservationDetail();
         });
 
         $('#sponsored-equipments').live('pageinit', function (event) {
@@ -167,7 +171,7 @@ $.applicationState = {
         });
     },
 
-// Initializes the gcReservation-detail.html page
+    // Initializes the gcReservation-detail.html page
     initGCReservationDetail: function () {
         $("#organizer-name").text(this.selectedGCReservation.organizer);
         $("#caching-date").text(this.formatDate($.applicationState.selectedGCReservation.cachingDate));
@@ -175,6 +179,15 @@ $.applicationState = {
         $("#sponsored-equipments-count").text(this.selectedGCReservation.equipmentsSupport.length);
         $("#sponsored-food-count").text(this.selectedGCReservation.foodSupport.length);
         $("#contact-info").text(this.selectedGCReservation.contact);
+    },
+    
+    // Initializes the regReservation-detail.html page
+    initGCReservationDetail: function () {
+        $("#organizer-name").text(this.selectedRegReservation.organizer);
+        $("#date").text(this.formatDate($.applicationState.selectedRegReservation.date));
+        $("#location").text(this.selectedRegReservation.locating);
+        $("#theme").text(this.selectedRegReservation.theme);
+        $("#contact-info").text(this.selectedRegReservation.contact);
     },
 
     initSpEquipments: function () {
@@ -246,7 +259,6 @@ $.applicationState = {
         $("#target-lon").text(this.selectedGeocache.lon);
 
         this.startTrackPosition();
-        this.drawCompass();
     },
 
     // Adds a section header to a list view.
@@ -294,8 +306,8 @@ $.applicationState = {
         if (navigator.geolocation) {
             navigator.geolocation.watchPosition(function (position) {
                 // Update the user's position
-                $("#current-lat").text($.applicationState.trimDecimal(position.coords.latitude));
-                $("#current-lon").text($.applicationState.trimDecimal(position.coords.longitude));
+                $("#current-lat").text(position.coords.latitude);
+                $("#current-lon").text(position.coords.longitude);
 
                 // Update the distance between the user's current position and the geocache
                 $("#distance").text(position.coords.latitude, position.coords.longitude, $.applicationState.selectedGeocache.lat, $.applicationState.selectedGeocache.lon)
@@ -318,66 +330,5 @@ $.applicationState = {
                 Math.sin(dLon / 2) * Math.sin(dLon / 2) * Math.cos(lat1) * Math.cos(lat2);
         var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
         var d = R * c;
-
-        // Return the distance, in miles, with 2 decimal places.
-        return this.trimDecimal(d);
-    },
-
-    // Trims a decimal number so it only has 2 decimal places.
-    trimDecimal : function (decimal) {
-        return Math.floor(decimal * 100) / 100
-    },
-
-    // Converts degrees to radians
-    toRadians: function (degrees) {
-        return degrees * Math.PI / 180
-    },
-
-    drawCompass: function () {
-        var compass = document.getElementById('compass').appendChild(document.createElement('article'));;
-        compass.id = 'compass';
-        var spinner = compass.appendChild(document.createElement('article'));
-        spinner.id = 'spinner';
-        var pin = spinner.appendChild(document.createElement('article'));
-        pin.id = 'pin';
-
-        for (var degrees = 0, degree; degrees < 360; degrees += 30) {
-            degree = spinner.appendChild(document.createElement('label'));
-            degree.className = 'degree';
-            degree.innerText = degrees;
-            degree.style.webkitTransform = 'rotateZ(' + degrees + 'deg)'
-        }
-        ['N', 'NE', 'E', 'SE', 'S', 'SW', 'W', 'NW'].forEach(function (label, index) {
-            var main = ((index % 2) ? '' : ' main');
-            point = spinner.appendChild(document.createElement('label'));
-            point.className = 'point' + main;
-            point.innerText = label;
-            point.style.webkitTransform = 'rotateZ(' + (index * 45) + 'deg)'
-            arrow = spinner.appendChild(document.createElement('div'));
-            arrow.className = 'arrow' + main;
-            arrow.style.webkitTransform = 'rotateZ(' + (index * 45) + 'deg)'
-        });
-
-        var lastHeading = 0;
-        window.addEventListener('deviceorientation', function (e) {
-            var heading = e.webkitCompassHeading + window.orientation;
-            if (Math.abs(heading - lastHeading) < 180) {
-                spinner.style.webkitTransition = 'all 0.2s ease-in-out';
-            } else {
-                spinner.style.webkitTransition = 'none';
-            }
-            spinner.style.webkitTransform = 'rotateZ(-' + heading + 'deg)';
-            lastHeading = heading;
-        }, false);
-
-        document.body.addEventListener('touchstart', function (e) {
-            e.preventDefault();
-        }, false);
-
-        window.addEventListener('orientationchange', function (e) {
-            window.scrollTo(0, 1);
-        }, false);
-
-        setTimeout(function () { window.scrollTo(0, 1); }, 0);
     }
 }
