@@ -155,7 +155,7 @@ $.applicationState = {
             var id = $("a", this).attr("gcRes-id");
             if (id) {
                 var idInt = parseInt(id);
-                var item = $.grep($.applicationState.allReservations, function (item, index) { return item.id == idInt; })[0];
+                var item = $.grep($.applicationState.allGCReservations, function (item, index) { return item.id == idInt; })[0];
                 $.applicationState.selectedGCReservation = item;
             }
         });
@@ -165,7 +165,7 @@ $.applicationState = {
             var id = $("a", this).attr("regRes-id");
             if (id) {
                 var idInt = parseInt(id);
-                var item = $.grep($.applicationState.allReservations, function (item, index) { return item.id == idInt; })[0];
+                var item = $.grep($.applicationState.allRegReservations, function (item, index) { return item.id == idInt; })[0];
                 $.applicationState.selectedRegReservation = item;
             }
         });
