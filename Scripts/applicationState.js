@@ -314,11 +314,11 @@ $.applicationState = {
         if (navigator.geolocation) {
             navigator.geolocation.watchPosition(function (position) {
                 // Update the user's position
-                $("#current-lat").text(position.coords.latitude);
-                $("#current-lon").text(position.coords.longitude);
+                $("#current-lat").text($.applicationState.trimDecimal(position.coords.latitude));
+                $("#current-lon").text($.applicationState.trimDecimal(position.coords.longitude));
 
                 // Update the distance between the user's current position and the geocache
-                $("#distance").text(position.coords.latitude, position.coords.longitude, $.applicationState.selectedGeocache.lat, $.applicationState.selectedGeocache.lon)
+                $("#distance").text(distanceBetweenCoordinates(position.coords.latitude, position.coords.longitude, $.applicationState.selectedGeocache.lat, $.applicationState.selectedGeocache.lon));
             });
         }
         else {
