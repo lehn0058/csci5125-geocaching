@@ -220,6 +220,9 @@ $.applicationState = {
     },
 
     initGpsData: function () {
+        $("#target-lat").text(this.selectedGeocache.lat);
+        $("#target-lon").text(this.selectedGeocache.lon);
+
         this.startTrackPosition();
     },
 
@@ -267,12 +270,30 @@ $.applicationState = {
     startTrackPosition: function () {
         if (navigator.geolocation) {
             navigator.geolocation.watchPosition(function (position) {
-                $("#lat").text(position.coords.latitude);
-                $("#lon").text(position.coords.longitude);
+                // Update the user's position
+                $("#current-lat").text(position.coords.latitude);
+                $("#current-lon").text(position.coords.longitude);
+
+                // Update the distance between the user's current position and the geocache
+                $("#distance").text(position.coords.latitude, position.coords.longitude, $.applicationState.selectedGeocache.lat, $.applicationState.selectedGeocache.lon)
             });
         }
         else {
             alert("Geolocation is not supported by this browser!");
         }
+    },
+
+    // Finds the distance between two geo-coordinate positions.
+    distanceBetweenCoordinates: function (lat1, lon1, lat2, lon2) {
+        var R = 6371; // km
+        var dLat = (lat2 - lat1).toRad();
+        var dLon = (lon2 - lon1).toRad();
+        var lat1 = lat1.toRad();
+        var lat2 = lat2.toRad();
+
+        var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+                Math.sin(dLon / 2) * Math.sin(dLon / 2) * Math.cos(lat1) * Math.cos(lat2);
+        var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+        var d = R * c;
     }
 }
