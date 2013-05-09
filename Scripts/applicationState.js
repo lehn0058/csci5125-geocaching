@@ -183,7 +183,7 @@ $.applicationState = {
         
         
         $("#register-GC-button").click(function () {
-            var newRegisterNum = parseInt($("#register-count").val()) + 1;
+            var newRegisterNum = parseInt($("#register-count").text()) + 1;
             alert(newRegisterNum);
             $.applicationState.selectedGCReservation.registerNum = newRegisterNum;
             alert("Register Succeeded");
