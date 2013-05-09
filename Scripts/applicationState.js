@@ -24,8 +24,11 @@ $.applicationState = {
     // The current geocache that a user has selected. Defaults to null since a user doesn't initially have one selected.
     selectedGeocache: null,
 
-// The current reservation that a user has selected. Defaults to null since a user doesn't initially have one selected.
-    selectedReservation: null,
+    // The current geocaching reservation that a user has selected. Defaults to null since a user doesn't initially have one selected.
+    selectedGCReservation: null,
+    
+     // The current regular reservation that a user has selected. Defaults to null since a user doesn't initially have one selected.
+    selectedRegReservation: null,
 
     // Filters related to what caches should be displayed
     settings: {
@@ -138,40 +141,50 @@ $.applicationState = {
     initUserReservations: function () {
        
             // Add all reservations to the list view in their appropriate section
-        this.addSectionHeader($("#reservations-collection"), "Applied by Me");
-        this.addSelectableItems2($("#reservations-collection"), $.grep($.applicationState.allReservations, function (item) { return item.group == 0 }));
-        this.addSectionHeader($("#reservations-collection"), "Applied by Others");
-        this.addSelectableItems2($("#reservations-collection"), $.grep($.applicationState.allReservations, function (item) { return item.group == 1 }));
+        this.addSectionHeader($("#gcReservations-collection"), "GeoCaching 101 Events");
+        this.addSelectableItems2($("#gcReservations-collection"), $.applicationState.allGCReservations));
+        this.addSectionHeader($("#regReservations-collection"), "Applied by Others");
+        this.addSelectableItems3($("#regReservations-collection"), $.applicationState.allRegReservations);
 
         // Attach an event listener to each item in the collection
-        $('#reservations-collection li').on('click', function () {
-            var id = $("a", this).attr("res-id");
+        $('#gcReservations-collection li').on('click', function () {
+            var id = $("a", this).attr("gcRes-id");
             if (id) {
                 var idInt = parseInt(id);
                 var item = $.grep($.applicationState.allReservations, function (item, index) { return item.id == idInt; })[0];
-                $.applicationState.selectedReservation= item;
+                $.applicationState.selectedGCReservation= item;
+            }
+        });
+        
+        // Attach an event listener to each item in the collection
+        $('#regReservations-collection li').on('click', function () {
+            var id = $("a", this).attr("regRes-id");
+            if (id) {
+                var idInt = parseInt(id);
+                var item = $.grep($.applicationState.allReservations, function (item, index) { return item.id == idInt; })[0];
+                $.applicationState.selectedRegReservation= item;
             }
         });
     },
 
-// Initializes the reservation-detail.html page
-    initReservationDetail: function () {
-        $("#organizer-name").text(this.selectedReservation.organizer);
-        $("#caching-date").text(this.formatDate($.applicationState.selectedReservation.cachingDate));
-        $("#difficulty").text(this.selectedReservation.difficulty.name);
-        $("#sponsored-equipments-count").text(this.selectedReservation.equipmentsSupport.length);
-        $("#sponsored-food-count").text(this.selectedReservation.foodSupport.length);
-        $("#contact-info").text(this.selectedReservation.contact);
+// Initializes the gcReservation-detail.html page
+    initGCReservationDetail: function () {
+        $("#organizer-name").text(this.selectedGCReservation.organizer);
+        $("#caching-date").text(this.formatDate($.applicationState.selectedGCReservation.cachingDate));
+        $("#difficulty").text(this.selectedGCReservation.difficulty.name);
+        $("#sponsored-equipments-count").text(this.selectedGCReservation.equipmentsSupport.length);
+        $("#sponsored-food-count").text(this.selectedGCReservation.foodSupport.length);
+        $("#contact-info").text(this.selectedGCReservation.contact);
     },
 
     initSpEquipments: function () {
-        $("#back-button-text").text("Event by " + this.selectedReservation.organizer);
-        this.addItems($("#sponsored-equipments-list"), this.selectedReservation.equipmentsSupport);
+        $("#back-button-text").text("Event by " + this.selectedGCReservation.organizer);
+        this.addItems($("#sponsored-equipments-list"), this.selectedGCReservation.equipmentsSupport);
     },
 
     initSpFood: function () {
-        $("#back-button-text").text("Event by " + this.selectedReservation.organizer);
-        this.addItems($("#sponsored-food-list"), this.selectedReservation.foodSupport)
+        $("#back-button-text").text("Event by " + this.selectedGCReservation.organizer);
+        this.addItems($("#sponsored-food-list"), this.selectedGCReservation.foodSupport)
     },
 
     // Initializes the caches.html page
