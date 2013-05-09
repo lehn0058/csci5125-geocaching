@@ -45,13 +45,24 @@ $.applicationState = {
     ],
 
 
-    // A few collections of our mocked up reservations
-    allReservations: [
-        { id: 1, applicant: "John Doe", group: $.enums.eventCategories.appliedByMe, cachingDate: new Date(2013, 6, 6, 8, 0, 0, 0), difficulty: $.enums.difficulty.hard, equipmentsSupport: [{ name: "Magellan CX0310SGXNA eXplorist 310 Waterproof Hiking GPS" }, { name: "Cache Advance Magnetic Bolt" }, { name: "Garmin nüvi 1300T GPS Navigation System" }], foodSupport: [{ name: "Cookies"},{ name: "Bread"},{ name: "AppleJuice"} ], contact: "6122345612" },
-        { id: 2, applicant: "John Doe", group: $.enums.eventCategories.appliedByMe, cachingDate: new Date(2013, 7, 1, 12, 0, 0, 0), difficulty: $.enums.difficulty.normal, equipmentsSupport: [{ name: "Garmin nüvi 1300T GPS Navigation System" }], foodSupport: [{ name: "OrangeJuice" },{ name: "ChickenWings" }], contact: "6122345612" },
-        { id: 3, applicant: "John Doe", group: $.enums.eventCategories.appliedByMe, cachingDate: new Date(2013, 5, 31, 9, 0, 0, 0), difficulty: $.enums.difficulty.hard, equipmentsSupport: [{ name: "Cache Advance Magnetic Bolt" }, { name: "Cache Advance Magnetic Vehicle Travel Bug" }, { name: "Lowrance Endura Outback Gps" }], foodSupport: [{ name: "AppleJuice" },{ name: "Sandwich" }] , contact: "6122345612"},
-        { id: 4, applicant: "Divid", group: $.enums.eventCategories.appliedByOthers, cachingDate: new Date(2013, 10, 19, 10, 0, 0, 0), difficulty: $.enums.difficulty.easy, equipmentsSupport: [{ name: "Lowrance Endura Outback Gps" }], foodSupport: [{ name: "OrangeJuice" }], contact: "2119087761" },
-        { id: 5, applicant: "Jessica", group: $.enums.eventCategories.appliedByOthers, cachingDate: new Date(2013, 5, 22, 14, 0, 0, 0), difficulty: $.enums.difficulty.easy, equipmentsSupport: [{ name: "Cache Angel Geocoin - The Seeker - Antique Silver" }], foodSupport: [{ name: "Sandwich" }, { name: "Cookies" }] , contact: "803712467"}
+    // A few collections of our mocked up gcReservations
+    allGCReservations: [
+        { id: 1, organizer: "John Doe", group: $.enums.eventCategories.appliedByMe, cachingDate: new Date(2013, 6, 6, 8, 0, 0, 0), difficulty: $.enums.difficulty.hard, equipmentsSupport: [{ name: "Magellan CX0310SGXNA eXplorist 310 Waterproof Hiking GPS" }, { name: "Cache Advance Magnetic Bolt" }, { name: "Garmin nüvi 1300T GPS Navigation System" }], foodSupport: [{ name: "Cookies"},{ name: "Bread"},{ name: "AppleJuice"} ], contact: "6122345612" },
+        { id: 2, organizer: "John Doe", group: $.enums.eventCategories.appliedByMe, cachingDate: new Date(2013, 7, 1, 12, 0, 0, 0), difficulty: $.enums.difficulty.normal, equipmentsSupport: [{ name: "Garmin nüvi 1300T GPS Navigation System" }], foodSupport: [{ name: "OrangeJuice" },{ name: "ChickenWings" }], contact: "6122345612" },
+        { id: 3, organizer: "John Doe", group: $.enums.eventCategories.appliedByMe, cachingDate: new Date(2013, 5, 31, 9, 0, 0, 0), difficulty: $.enums.difficulty.hard, equipmentsSupport: [{ name: "Cache Advance Magnetic Bolt" }, { name: "Cache Advance Magnetic Vehicle Travel Bug" }, { name: "Lowrance Endura Outback Gps" }], foodSupport: [{ name: "AppleJuice" },{ name: "Sandwich" }] , contact: "6122345612"},
+        { id: 4, organizer: "Divid", group: $.enums.eventCategories.appliedByOthers, cachingDate: new Date(2013, 10, 19, 10, 0, 0, 0), difficulty: $.enums.difficulty.easy, equipmentsSupport: [{ name: "Lowrance Endura Outback Gps" }], foodSupport: [{ name: "OrangeJuice" }], contact: "2119087761" },
+        { id: 5, organizer: "Jessica", group: $.enums.eventCategories.appliedByOthers, cachingDate: new Date(2013, 5, 22, 14, 0, 0, 0), difficulty: $.enums.difficulty.easy, equipmentsSupport: [{ name: "Cache Angel Geocoin - The Seeker - Antique Silver" }], foodSupport: [{ name: "Sandwich" }, { name: "Cookies" }] , contact: "803712467"}
+    ],
+
+    // A few collections of our mocked up regReservations
+    allRegReservations: [
+        { id: 1, organizer: "John Doe", group: $.enums.eventCategories.appliedByMe, date: new Date(2013, 6, 1, 8, 0, 0, 0), location: "Wilson Park, Philadelphia, PA", theme: "public lecture", contact: "6122345612" },
+        { id: 2, organizer: "John Doe", group: $.enums.eventCategories.appliedByMe, date: new Date(2013, 6, 8, 10, 0, 0, 0), location: "El Taller Del Alfarero Center, 14521 South Normandie Avenue
+Gardena, CA", theme: "happy weekend dinner", contact: "6122345612" },
+        { id: 3, organizer: "John Doe", group: $.enums.eventCategories.appliedByMe, date: new Date(2013, 7, 1, 10, 0, 0, 0), location: "Chianti Grill, 2050 N Snelling Ave, Roseville, MN", theme: "annual geocaching meeting for local group", contact: "6122345612"},
+        { id: 4, organizer: "Divid", group: $.enums.eventCategories.appliedByOthers, date: new Date(2013, 7, 2, 9, 30, 0, 0), location: "New York University, 44 W 4th St
+(between Greene St & Mercer St) New York, NY ", theme: "national geocaching knowledge competition", contact: "2119087761" },
+        { id: 5, organizer: "Jessica", group: $.enums.eventCategories.appliedByOthers, date: new Date(2013, 5, 22, 14, 30, 0, 0), location: "The Original Valentino's, 33497 S Dixie Hwy Unit 105 Florida City, FL  ", theme: "local flee market activity for geocaching device ", contact: "803712467"}
     ],
 
 
@@ -147,7 +158,7 @@ $.applicationState = {
 
 // Initializes the reservation-detail.html page
     initReservationDetail: function () {
-        $("#applicant-name").text(this.selectedReservation.applicant);
+        $("#organizer-name").text(this.selectedReservation.organizer);
         $("#caching-date").text(this.formatDate($.applicationState.selectedReservation.cachingDate));
         $("#difficulty").text(this.selectedReservation.difficulty.name);
         $("#sponsored-equipments-count").text(this.selectedReservation.equipmentsSupport.length);
@@ -156,12 +167,12 @@ $.applicationState = {
     },
 
     initSpEquipments: function () {
-        $("#back-button-text").text("Event by " + this.selectedReservation.applicant);
+        $("#back-button-text").text("Event by " + this.selectedReservation.organizer);
         this.addItems($("#sponsored-equipments-list"), this.selectedReservation.equipmentsSupport);
     },
 
     initSpFood: function () {
-        $("#back-button-text").text("Event by " + this.selectedReservation.applicant);
+        $("#back-button-text").text("Event by " + this.selectedReservation.organizer);
         this.addItems($("#sponsored-food-list"), this.selectedReservation.foodSupport)
     },
 
@@ -244,7 +255,7 @@ $.applicationState = {
  // Adds a collection of items to a list view(reservation list). These items are selectable.
     addSelectableItems2: function (collectionView, items) {
         $.each(items, function (index, item) {
-            var template = '<li data-theme="c"><a href="reservation-detail.html" data-transition="slide" res-id=' + item.id + '>' + item.applicant + '</a></li>';
+            var template = '<li data-theme="c"><a href="reservation-detail.html" data-transition="slide" res-id=' + item.id + '>' + item.organizer+ '</a></li>';
             collectionView.append(template).listview('refresh');
         });
     },
@@ -275,7 +286,7 @@ $.applicationState = {
                 $("#current-lon").text(position.coords.longitude);
 
                 // Update the distance between the user's current position and the geocache
-                $("#distance").text($.applicationState.distanceBetweenCoordinates(position.coords.latitude, position.coords.longitude, $.applicationState.selectedGeocache.lat, $.applicationState.selectedGeocache.lon));
+                $("#distance").text(position.coords.latitude, position.coords.longitude, $.applicationState.selectedGeocache.lat, $.applicationState.selectedGeocache.lon)
             });
         }
         else {
@@ -285,23 +296,15 @@ $.applicationState = {
 
     // Finds the distance between two geo-coordinate positions.
     distanceBetweenCoordinates: function (lat1, lon1, lat2, lon2) {
-        var R = 3959; // mi
-        var dLat = this.toRadians(lat2 - lat1);
-        var dLon = this.toRadians(lon2 - lon1);
-        var lat1 = this.toRadians(lat1);
-        var lat2 = this.toRadians(lat2);
+        var R = 6371; // km
+        var dLat = (lat2 - lat1).toRad();
+        var dLon = (lon2 - lon1).toRad();
+        var lat1 = lat1.toRad();
+        var lat2 = lat2.toRad();
 
         var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
                 Math.sin(dLon / 2) * Math.sin(dLon / 2) * Math.cos(lat1) * Math.cos(lat2);
         var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
         var d = R * c;
-
-        // Return the distance, in miles, with 2 decimal places.
-        return Math.floor(d * 100) / 100
-    },
-
-    // Converts degrees to radians
-    toRadians: function (degrees) {
-        return degrees * Math.PI / 180
     }
 }
