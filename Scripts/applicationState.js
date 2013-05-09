@@ -184,7 +184,7 @@ $.applicationState = {
         
         $("#register-GC-button").click(function () {
             var newRegisterNum = parseInt($("#register-count").val()) + 1;
-            $.applicationState.selectedGeocache.registerNum = newRegisterNum;
+            $.applicationState.selectedGCReservation.registerNum = newRegisterNum;
 
             // Refresh the detail
             $("#register-count").text(this.selectedGCReservation.registerNum);
