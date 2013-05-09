@@ -286,14 +286,22 @@ $.applicationState = {
     // Finds the distance between two geo-coordinate positions.
     distanceBetweenCoordinates: function (lat1, lon1, lat2, lon2) {
         var R = 3959; // mi
-        var dLat = (lat2 - lat1).toRad();
-        var dLon = (lon2 - lon1).toRad();
-        var lat1 = lat1.toRad();
-        var lat2 = lat2.toRad();
+        var dLat = this.toRadians(lat2 - lat1);
+        var dLon = this.toRadians(lon2 - lon1);
+        var lat1 = this.toRadians(lat1);
+        var lat2 = this.toRadians(lat2);
 
         var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
                 Math.sin(dLon / 2) * Math.sin(dLon / 2) * Math.cos(lat1) * Math.cos(lat2);
         var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
         var d = R * c;
+
+        // Return the distance, in miles, with 2 decimal places.
+        return Math.floor(d * 100) / 100
+    },
+
+    // Converts degrees to radians
+    toRadians: function (degrees) {
+        return degrees * Math.PI / 180
     }
 }
