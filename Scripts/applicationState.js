@@ -276,10 +276,18 @@ $.applicationState = {
     },
 
 
- // Adds a collection of items to a list view(reservation list). These items are selectable.
+    // Adds a collection of items to a list view(gcReservation list). These items are selectable.
     addSelectableItems2: function (collectionView, items) {
         $.each(items, function (index, item) {
-            var template = '<li data-theme="c"><a href="reservation-detail.html" data-transition="slide" res-id=' + item.id + '>' + item.organizer+ '</a></li>';
+            var template = '<li data-theme="c"><a href="gcReservation-detail.html" data-transition="slide" res-id=' + item.id + '>' + item.organizer+ '</a></li>';
+            collectionView.append(template).listview('refresh');
+        });
+    },
+    
+    // Adds a collection of items to a list view(regReservation list). These items are selectable.
+    addSelectableItems3: function (collectionView, items) {
+        $.each(items, function (index, item) {
+            var template = '<li data-theme="c"><a href="regReservation-detail.html" data-transition="slide" res-id=' + item.id + '>' + item.organizer+ '</a></li>';
             collectionView.append(template).listview('refresh');
         });
     },
