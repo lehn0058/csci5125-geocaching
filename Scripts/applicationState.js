@@ -99,6 +99,10 @@ $.applicationState = {
         $('#report-problem').live('pageinit', function (event) {
             $.applicationState.initReportProblem();
         });
+
+        $('#gps-data').live('pageinit', function (event) {
+            $.applicationState.initGpsData();
+        });
     },
 
     // Initializes the user-settings.html page.
@@ -214,6 +218,10 @@ $.applicationState = {
         $("#back-button-text").text(this.selectedGeocache.name);
     },
 
+    initGpsData: function () {
+        this.startTrackPosition();
+    },
+
     // Adds a section header to a list view.
     addSectionHeader: function (collectionView, headerText) {
         var template = '<li data-role="list-divider" role="heading">' + headerText + '</li>';
@@ -252,5 +260,18 @@ $.applicationState = {
     // Applys a display format to a date object
     formatDate: function (date) {
         return date.getMonth() + '/' + date.getDate() + '/' + date.getFullYear();
+    },
+
+    // Begins tracking a user's geo-location.
+    startTrackPosition: function () {
+        if (navigator.geolocation) {
+            navigator.geolocation.watchPosition(function (position) {
+                $("#lat").text(position.coords.latitude);
+                $("#lon").text(position.coords.longitude);
+            });
+        }
+        else {
+            alert("Geolocation is not supported by this browser!");
+        }
     }
 }
