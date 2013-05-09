@@ -184,11 +184,11 @@ $.applicationState = {
         
         $("#register-GC-button").click(function () {
             var newRegisterNum = parseInt($("#register-count").val()) + 1;
+            alert(newRegisterNum);
             $.applicationState.selectedGCReservation.registerNum = newRegisterNum;
-            alert("Can you see?");
+            alert("Register Succeeded");
             // Refresh the detail
-            //$("#register-count").text(this.selectedGCReservation.registerNum);
-            $("#register-count").text("10000");
+            $("#register-count").text(this.selectedGCReservation.registerNum);
         });
     },
 
