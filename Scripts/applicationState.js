@@ -275,7 +275,7 @@ $.applicationState = {
                 $("#current-lon").text(position.coords.longitude);
 
                 // Update the distance between the user's current position and the geocache
-                $("#distance").text(position.coords.latitude, position.coords.longitude, $.applicationState.selectedGeocache.lat, $.applicationState.selectedGeocache.lon)
+                $("#distance").text($.applicationState.distanceBetweenCoordinates(position.coords.latitude, position.coords.longitude, $.applicationState.selectedGeocache.lat, $.applicationState.selectedGeocache.lon));
             });
         }
         else {
@@ -285,7 +285,7 @@ $.applicationState = {
 
     // Finds the distance between two geo-coordinate positions.
     distanceBetweenCoordinates: function (lat1, lon1, lat2, lon2) {
-        var R = 6371; // km
+        var R = 3959; // mi
         var dLat = (lat2 - lat1).toRad();
         var dLon = (lon2 - lon1).toRad();
         var lat1 = lat1.toRad();
