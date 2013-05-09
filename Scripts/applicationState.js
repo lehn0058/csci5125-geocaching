@@ -146,7 +146,7 @@ $.applicationState = {
        
             // Add all reservations to the list view in their appropriate section
         this.addSectionHeader($("#gcReservations-collection"), "GeoCaching 101 Events");
-        this.addSelectableItems2($("#gcReservations-collection"), $.applicationState.allGCReservations));
+        this.addSelectableItems2($("#gcReservations-collection"), $.applicationState.allGCReservations);
         this.addSectionHeader($("#regReservations-collection"), "Applied by Others");
         this.addSelectableItems3($("#regReservations-collection"), $.applicationState.allRegReservations);
 
