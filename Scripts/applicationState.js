@@ -269,7 +269,12 @@ $.applicationState = {
         $("#target-lat").text(this.selectedGeocache.lat);
         $("#target-lon").text(this.selectedGeocache.lon);
 
-        this.startTrackPosition();
+        var watchID = this.startTrackPosition();
+
+        $('#gps-data').live('pageremove', function (event) {
+            navigator.geolocation.clearWatch(watchID);
+        });
+
         this.drawCompass();
     },
 
@@ -323,7 +328,7 @@ $.applicationState = {
     // Begins tracking a user's geo-location.
     startTrackPosition: function () {
         if (navigator.geolocation) {
-            navigator.geolocation.watchPosition(function (position) {
+            return navigator.geolocation.watchPosition(function (position) {
                 // Update the user's position
                 //$("#current-lat").text($.applicationState.trimDecimal(position.coords.latitude));
                 //$("#current-lon").text($.applicationState.trimDecimal(position.coords.longitude));
@@ -401,10 +406,6 @@ $.applicationState = {
             spinner.style.webkitTransform = 'rotateZ(-' + heading + 'deg)';
             lastHeading = heading;
         }, false);
-
-        //document.body.addEventListener('touchstart', function (e) {
-        //    e.preventDefault();
-        //}, false);
 
         window.addEventListener('orientationchange', function (e) {
             window.scrollTo(0, 1);
