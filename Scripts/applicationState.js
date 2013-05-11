@@ -402,9 +402,9 @@ $.applicationState = {
             lastHeading = heading;
         }, false);
 
-        document.body.addEventListener('touchstart', function (e) {
-            e.preventDefault();
-        }, false);
+        //document.body.addEventListener('touchstart', function (e) {
+        //    e.preventDefault();
+        //}, false);
 
         window.addEventListener('orientationchange', function (e) {
             window.scrollTo(0, 1);
