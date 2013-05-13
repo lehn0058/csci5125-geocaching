@@ -335,6 +335,9 @@ $.applicationState = {
 
                 // Update the distance between the user's current position and the geocache
                 $("#distance").text($.applicationState.distanceBetweenCoordinates(position.coords.latitude, position.coords.longitude, $.applicationState.selectedGeocache.lat, $.applicationState.selectedGeocache.lon));
+
+                // Orient the arrow that points in the direction of the geocache
+
             });
         }
         else {
