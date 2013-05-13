@@ -412,5 +412,15 @@ $.applicationState = {
         }, false);
 
         setTimeout(function () { window.scrollTo(0, 1); }, 0);
+
+        // Draw the arrow that points in the direction of the geocache.
+        var main = ' geocache';
+        point = spinner.appendChild(document.createElement('label'));
+        point.className = 'point' + main;
+        //point.innerText = 'Here!';
+        point.style.webkitTransform = 'rotateZ(' + (0 * 45) + 'deg)'
+        arrow = spinner.appendChild(document.createElement('div'));
+        arrow.className = 'arrow' + main;
+        arrow.style.webkitTransform = 'rotateZ(' + (0 * 45) + 'deg)'
     }
 }

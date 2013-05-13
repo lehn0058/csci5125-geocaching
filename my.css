@@ -75,3 +75,7 @@
 .arrow.main {
     border-bottom: 10px solid #444;
 }
+.arrow.geocache {
+    border-bottom: 80px solid;
+    border-bottom-color: red;
+}
