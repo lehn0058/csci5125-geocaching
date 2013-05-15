@@ -279,14 +279,13 @@ $.applicationState = {
         $("#back-button-text").text(this.selectedGeocache.name);
         this.addItems($("#to-find-collection"), this.selectedGeocache.toFind);
 
-        //$("#add-hint-button").click(function () {
-        //    var inputText = $("#add-hint-text-area").val();
-        //    $("#add-hint-text-area").val("");
-        //    $.applicationState.selectedGeocache.hints.push({ name: inputText });
+        $("#add-to-find-button").click(function () {
+            // Add the logged on user to the to-find collection
+            $.applicationState.selectedGeocache.toFind.push({ name: $.applicationState.userName });
 
-        //    // Refresh the list view
-        //    $.applicationState.addItems($("#to-find-collection"), $.applicationState.selectedGeocache.toFind);
-        //});
+            // Refresh the list view
+            $.applicationState.addItems($("#to-find-collection"), $.applicationState.selectedGeocache.toFind);
+        });
     },
 
     initReportProblem: function () {
