@@ -39,12 +39,12 @@ $.applicationState = {
 
     // A few collections of our mocked up geocache locations
     allGeocaches: [
-        { id: 1, lat: 45.478652, lon: -92.754652, name: "My First GeoCache", group: $.enums.cacheGroups.nearYou, lastFound: new Date(2012, 11, 15, 5, 0, 0, 0), difficulty: $.enums.difficulty.easy, toFind: [{ name: "Mary M." }, { name: "David D."}], foundBy: [{ name: "John D." }, { name: "Ellen M." }, { name: "Mike E." }], hints: [{ name: "Make sure to look closely at all the leaves." }] },
-        { id: 2, lat: 45.578652, lon: -92.654652, name: "By the pond", group: $.enums.cacheGroups.nearYou, lastFound: new Date(2013, 3, 3, 12, 0, 0, 0), difficulty: $.enums.difficulty.normal, toFind: [{ name: "Lisa L." }, { name: "Brandon B."}], foundBy: [{ name: "John D." }], hints: [{ name: "This one should probably be a tiny size instead of a small. I was not looking close enough at first." }] },
-        { id: 3, lat: 45.678652, lon: -93.354652, name: "Near the forrest", group: $.enums.cacheGroups.nearYou, lastFound: new Date(2012, 11, 15, 5, 0, 0, 0), difficulty: $.enums.difficulty.hard, toFind: [{ name: "Ryan R." }], foundBy: [{ name: "Zach Q." }, { name: "Ellorie L." }, { name: "Josh J." }, { name: "Quinton T." }], hints: [{ name: "Look near the trees, but NOT in them." }] },
-        { id: 4, lat: 44.778652, lon: -93.254652, name: "Through the woods", group: $.enums.cacheGroups.nearYou, lastFound: new Date(2012, 10, 23, 5, 0, 0, 0), difficulty: $.enums.difficulty.hard, toFind: [{ name: "Sue S." }, { name: "Eric E." }, {name: "Aaron A."}], foundBy: [{ name: "Ellen M." }, { name: "Mike E." }], hints: [{ name: "Going with someone tall makes this one much easier." }] },
-        { id: 5, lat: 44.878652, lon: -93.154652, name: "Prairy day", group: $.enums.cacheGroups.recommended, lastFound: new Date(2013, 3, 6, 20, 0, 0, 0), difficulty: $.enums.difficulty.easy, toFind: [{ name: "Rick R." }, { name: "David D."}], foundBy: [{ name: "Mike E." }], hints: [{ name: "Think wet... Very wet..." }] },
-        { id: 6, lat: 44.955, lon: -93.2, name: "Twins Stadium", group: $.enums.cacheGroups.recommended, lastFound: new Date(2013, 2, 17, 5, 0, 0, 0), difficulty: $.enums.difficulty.easy, toFind: [{ name: "Elisa E." }, { name: "Erica E"}], foundBy: [{ name: "Tony S." }, { name: "Logan W." }], hints: [{ name: "Don't look for this one just before a game. You end up getting a lot of funny looks." }, { name: "I kept looking right next to the statue, but that is not where it is." }] }
+        { id: 1, lat: 45.478652, lon: -92.754652, name: "My First GeoCache", group: $.enums.cacheGroups.nearYou, lastFound: new Date(2012, 11, 15, 5, 0, 0, 0), reportedProblems:[], difficulty: $.enums.difficulty.easy, toFind: [{ name: "Mary M." }, { name: "David D."}], foundBy: [{ name: "John D." }, { name: "Ellen M." }, { name: "Mike E." }], hints: [{ name: "Make sure to look closely at all the leaves." }] },
+        { id: 2, lat: 45.578652, lon: -92.654652, name: "By the pond", group: $.enums.cacheGroups.nearYou, lastFound: new Date(2013, 3, 3, 12, 0, 0, 0), reportedProblems: [{name:"I was not able to find this one. Maybe it is gone?"}], difficulty: $.enums.difficulty.normal, toFind: [{ name: "Lisa L." }, { name: "Brandon B." }], foundBy: [{ name: "John D." }], hints: [{ name: "This one should probably be a tiny size instead of a small. I was not looking close enough at first." }] },
+        { id: 3, lat: 45.678652, lon: -93.354652, name: "Near the forrest", group: $.enums.cacheGroups.nearYou, lastFound: new Date(2012, 11, 15, 5, 0, 0, 0), reportedProblems: [{name:"When I found this one, an entire side of the container was broken in." }], difficulty: $.enums.difficulty.hard, toFind: [{ name: "Ryan R." }], foundBy: [{ name: "Zach Q." }, { name: "Ellorie L." }, { name: "Josh J." }, { name: "Quinton T." }], hints: [{ name: "Look near the trees, but NOT in them." }] },
+        { id: 4, lat: 44.778652, lon: -93.254652, name: "Through the woods", group: $.enums.cacheGroups.nearYou, lastFound: new Date(2012, 10, 23, 5, 0, 0, 0), reportedProblems: [], difficulty: $.enums.difficulty.hard, toFind: [{ name: "Sue S." }, { name: "Eric E." }, {name: "Aaron A."}], foundBy: [{ name: "Ellen M." }, { name: "Mike E." }], hints: [{ name: "Going with someone tall makes this one much easier." }] },
+        { id: 5, lat: 44.878652, lon: -93.154652, name: "Prairy day", group: $.enums.cacheGroups.recommended, lastFound: new Date(2013, 3, 6, 20, 0, 0, 0), reportedProblems: [{ name: "This one is clearly missing. I am an experienced cacher and I have searched for it half a dozen times. It is supposed to be easy, and is nowhere to be found." }, {name:"I too could not find it. I think it is missing as well."}], difficulty: $.enums.difficulty.easy, toFind: [{ name: "Rick R." }, { name: "David D."}], foundBy: [{ name: "Mike E." }], hints: [{ name: "Think wet... Very wet..." }] },
+        { id: 6, lat: 44.955, lon: -93.2, name: "Twins Stadium", group: $.enums.cacheGroups.recommended, lastFound: new Date(2013, 2, 17, 5, 0, 0, 0), reportedProblems: [], difficulty: $.enums.difficulty.easy, toFind: [{ name: "Elisa E." }, { name: "Erica E"}], foundBy: [{ name: "Tony S." }, { name: "Logan W." }], hints: [{ name: "Don't look for this one just before a game. You end up getting a lot of funny looks." }, { name: "I kept looking right next to the statue, but that is not where it is." }] }
     ],
 
 
@@ -254,6 +254,7 @@ $.applicationState = {
         $("#found-by-count").text(this.selectedGeocache.foundBy.length);
         $("#hints-count").text(this.selectedGeocache.hints.length);
         $("#to-find-count").text(this.selectedGeocache.toFind.length);
+        $("#report-problem-count").text(this.selectedGeocache.reportedProblems.length);
     },
 
     initFoundBy: function () {
@@ -290,6 +291,17 @@ $.applicationState = {
 
     initReportProblem: function () {
         $("#back-button-text").text(this.selectedGeocache.name);
+
+        this.addItems($("#report-problem-collection"), this.selectedGeocache.reportedProblems);
+
+        $("#report-problem-button").click(function () {
+            var inputText = $("#report-problem-text-area").val();
+            $("#report-problem-text-area").val("");
+            $.applicationState.selectedGeocache.reportedProblems.push({ name: inputText });
+
+            // Refresh the list view
+            $.applicationState.addItems($("#report-problem-collection"), $.applicationState.selectedGeocache.reportedProblems);
+        });
     },
 
     initGpsData: function () {

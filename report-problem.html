@@ -26,7 +26,7 @@
                 </h3>
             </div>
             <div data-role="content">
-                <a data-role="button" href="#page1">Cache is damaged</a>
+<!--                <a data-role="button" href="#page1">Cache is damaged</a>
                 <a data-role="button" href="#page1">Cache has been moved</a>
                 <a data-role="button" href="#page1">I think the cache is gone</a>
                 
@@ -38,7 +38,15 @@
                     <li data-theme="c">
                         Issue #2
                     </li>
+                </ul>-->
+
+                <ul id="report-problem-collection" data-role="listview" data-divider-theme="b" data-inset="true">
                 </ul>
+
+                <div data-role="fieldcontain">
+                    <textarea style="width:100%" id="report-problem-text-area" placeholder="Report text..."></textarea>
+                </div>
+                <a data-role="button" id="report-problem-button">Report</a>
             </div>
         </div>
     </body>
