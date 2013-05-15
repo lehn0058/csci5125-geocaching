@@ -119,6 +119,18 @@ $.applicationState = {
         $('#gps-data').live('pageinit', function (event) {
             $.applicationState.initGpsData();
         });
+        
+        $('#google_map').live('pageinit', function (event) {
+        	$.applicationState.initGoogleMap();
+        });
+        
+        $('#google_map').live('pageshow', function() {
+			$('#map_canvas').gmap('refresh');
+		});
+		
+		$('#google_map').live("pagehide", function() {
+			$('#map_canvas').gmap('clearWatch');
+		});
     },
 
     // Initializes the user-settings.html page.
@@ -238,8 +250,6 @@ $.applicationState = {
         $("#found-by-count").text(this.selectedGeocache.foundBy.length);
         $("#hints-count").text(this.selectedGeocache.hints.length);
 
-        var coordinates = this.selectedGeocache.lat + ',' + this.selectedGeocache.lon;
-        $("#static-map").html('<img src="https://maps.googleapis.com/maps/api/staticmap?center=' + coordinates + '&amp;zoom=13&amp;size=288x200&amp;markers=' + coordinates + '&amp;sensor=false" width="288" height="200">');
     },
 
     initFoundBy: function () {
@@ -278,6 +288,30 @@ $.applicationState = {
         this.drawCompass();
     },
 
+    //Initiate Google Map Geocache Finder
+    initGoogleMap: function () {
+    	var mobileDemo = { 'center': '57.7973333,12.0502107', 'zoom': 5 };
+				$('#map_canvas').gmap({'center': mobileDemo.center, 'zoom': mobileDemo.zoom, 'disableDefaultUI':true, 'callback': function(map) {
+					var self = this;
+					self.clear('markers');
+					self.watchPosition(function(position, status) {						
+						if ( status === 'OK' ) {
+							var latlng_self = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+							var latlng_selectedgeocache = new google.maps.LatLng(this.jQuery.applicationState.selectedGeocache.lat, this.jQuery.applicationState.selectedGeocache.lon);
+							if ( !self.get('markers').client ) {
+								self.addMarker({ 'id':'1', 'position': latlng_self, 'bounds': true });
+								self.addMarker({ 'id':'2', 'position': latlng_selectedgeocache, 'bounds':true});
+							} else {
+								self.get('markers').client.setPosition(latlng);
+								map.panTo(latlng);
+							}
+						}
+					});
+				}});
+				
+			
+    },
+        
     // Adds a section header to a list view.
     addSectionHeader: function (collectionView, headerText) {
         var template = '<li data-role="list-divider" role="heading">' + headerText + '</li>';
