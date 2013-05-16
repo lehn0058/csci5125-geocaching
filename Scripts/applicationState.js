@@ -221,7 +221,7 @@ $.applicationState = {
             alert("Register Succeeded");
             $.applicationState.selectedRegReservation.registerNum = newRegisterNum;            
             // Refresh the detail
-            $("#register-count").text($.applicationState.selectedGCReservation.registerNum);
+            $("#register-count").text($.applicationState.selectedRegReservation.registerNum);
         });
     },
 
