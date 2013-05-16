@@ -59,11 +59,11 @@ $.applicationState = {
 
     // A few collections of our mocked up regReservations
     allRegReservations: [
-        { id: 1, organizer: "John Doe", group: $.enums.eventCategories.appliedByMe, date: new Date(2013, 6, 1, 8, 0, 0, 0), locating: "Wilson Park, Philadelphia, PA", theme: "public lecture - a happy tour of exploration", contact: "6122345612" },
-        { id: 2, organizer: "John Doe", group: $.enums.eventCategories.appliedByMe, date: new Date(2013, 6, 8, 10, 0, 0, 0), locating: "El Taller Del Alfarero Center, 14521 South Normandie AvenueGardena, CA", theme: "happy weekend dinner", contact: "6122345612" },
-        { id: 3, organizer: "John Doe", group: $.enums.eventCategories.appliedByMe, date: new Date(2013, 7, 1, 10, 0, 0, 0), locating: "Chianti Grill, 2050 N Snelling Ave, Roseville, MN", theme: "annual geocaching meeting for local group", contact: "6122345612" },
-        { id: 4, organizer: "Divid", group: $.enums.eventCategories.appliedByOthers, date: new Date(2013, 7, 2, 9, 30, 0, 0), locating: "New York University, 44 W 4th St(between Greene St & Mercer St) New York, NY ", theme: "national geocaching knowledge competition", contact: "2119087761" },
-        { id: 5, organizer: "Jessica", group: $.enums.eventCategories.appliedByOthers, date: new Date(2013, 5, 22, 14, 30, 0, 0), locating: "The Original Valentino's, 33497 S Dixie Hwy Unit 105 Florida City, FL  ", theme: "local flee market activity for geocaching device ", contact: "803712467" }
+        { id: 1, organizer: "John Doe", group: $.enums.eventCategories.appliedByMe, date: new Date(2013, 6, 1, 8, 0, 0, 0), locating: "Wilson Park, Philadelphia, PA", theme: "public lecture - a happy tour of exploration", contact: "6122345612", registerNum: "39" },
+        { id: 2, organizer: "John Doe", group: $.enums.eventCategories.appliedByMe, date: new Date(2013, 6, 8, 10, 0, 0, 0), locating: "El Taller Del Alfarero Center, 14521 South Normandie AvenueGardena, CA", theme: "happy weekend dinner", contact: "6122345612", registerNum: "55" },
+        { id: 3, organizer: "John Doe", group: $.enums.eventCategories.appliedByMe, date: new Date(2013, 7, 1, 10, 0, 0, 0), locating: "Chianti Grill, 2050 N Snelling Ave, Roseville, MN", theme: "annual geocaching meeting for local group", contact: "6122345612", registerNum: "20" },
+        { id: 4, organizer: "Divid", group: $.enums.eventCategories.appliedByOthers, date: new Date(2013, 7, 2, 9, 30, 0, 0), locating: "New York University, 44 W 4th St(between Greene St & Mercer St) New York, NY ", theme: "national geocaching knowledge competition", contact: "2119087761", registerNum: "48" },
+        { id: 5, organizer: "Jessica", group: $.enums.eventCategories.appliedByOthers, date: new Date(2013, 5, 22, 14, 30, 0, 0), locating: "The Original Valentino's, 33497 S Dixie Hwy Unit 105 Florida City, FL  ", theme: "local flee market activity for geocaching device ", contact: "803712467", registerNum: "41" }
     ],
 
 
@@ -200,9 +200,8 @@ $.applicationState = {
         
         $("#register-GC-button").click(function () {
             var newRegisterNum = parseInt($("#register-count").text()) + 1;
-            alert(newRegisterNum);
-            $.applicationState.selectedGCReservation.registerNum = newRegisterNum;
             alert("Register Succeeded");
+            $.applicationState.selectedGCReservation.registerNum = newRegisterNum;            
             // Refresh the detail
             $("#register-count").text($.applicationState.selectedGCReservation.registerNum);
         });
@@ -215,6 +214,15 @@ $.applicationState = {
         $("#location").text(this.selectedRegReservation.locating);
         $("#theme").text(this.selectedRegReservation.theme);
         $("#contact-info").text(this.selectedRegReservation.contact);
+        $("#register-count").text(this.selectedRegReservation.registerNum);
+        
+         $("#register-Reg-button").click(function () {
+            var newRegisterNum = parseInt($("#register-count").text()) + 1;
+            alert("Register Succeeded");
+            $.applicationState.selectedRegReservation.registerNum = newRegisterNum;            
+            // Refresh the detail
+            $("#register-count").text($.applicationState.selectedGCReservation.registerNum);
+        });
     },
 
     initSpEquipments: function () {
