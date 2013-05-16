@@ -19,7 +19,7 @@
 // Create namespace for our application state
 $.applicationState = {
     // The name of the user
-    userName: "John Doe",
+    userName: "",
 
     // The current geocache that a user has selected. Defaults to null since a user doesn't initially have one selected.
     selectedGeocache: null,
