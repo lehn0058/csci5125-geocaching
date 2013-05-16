@@ -39,12 +39,12 @@ $.applicationState = {
 
     // A few collections of our mocked up geocache locations
     allGeocaches: [
-        { id: 1, lat: 45.478652, lon: -92.754652, name: "My First GeoCache", group: $.enums.cacheGroups.nearYou, lastFound: new Date(2012, 11, 15, 5, 0, 0, 0), reportedProblems:[], difficulty: $.enums.difficulty.easy, toFind: [{ name: "Mary M." }, { name: "David D."}], foundBy: [{ name: "John D." }, { name: "Ellen M." }, { name: "Mike E." }], hints: [{ name: "Make sure to look closely at all the leaves." }] },
-        { id: 2, lat: 45.578652, lon: -92.654652, name: "By the pond", group: $.enums.cacheGroups.nearYou, lastFound: new Date(2013, 3, 3, 12, 0, 0, 0), reportedProblems: [{name:"I was not able to find this one. Maybe it is gone?"}], difficulty: $.enums.difficulty.normal, toFind: [{ name: "Lisa L." }, { name: "Brandon B." }], foundBy: [{ name: "John D." }], hints: [{ name: "This one should probably be a tiny size instead of a small. I was not looking close enough at first." }] },
-        { id: 3, lat: 45.678652, lon: -93.354652, name: "Near the forrest", group: $.enums.cacheGroups.nearYou, lastFound: new Date(2012, 11, 15, 5, 0, 0, 0), reportedProblems: [{name:"When I found this one, an entire side of the container was broken in." }], difficulty: $.enums.difficulty.hard, toFind: [{ name: "Ryan R." }], foundBy: [{ name: "Zach Q." }, { name: "Ellorie L." }, { name: "Josh J." }, { name: "Quinton T." }], hints: [{ name: "Look near the trees, but NOT in them." }] },
-        { id: 4, lat: 44.778652, lon: -93.254652, name: "Through the woods", group: $.enums.cacheGroups.nearYou, lastFound: new Date(2012, 10, 23, 5, 0, 0, 0), reportedProblems: [], difficulty: $.enums.difficulty.hard, toFind: [{ name: "Sue S." }, { name: "Eric E." }, {name: "Aaron A."}], foundBy: [{ name: "Ellen M." }, { name: "Mike E." }], hints: [{ name: "Going with someone tall makes this one much easier." }] },
-        { id: 5, lat: 44.878652, lon: -93.154652, name: "Prairy day", group: $.enums.cacheGroups.recommended, lastFound: new Date(2013, 3, 6, 20, 0, 0, 0), reportedProblems: [{ name: "This one is clearly missing. I am an experienced cacher and I have searched for it half a dozen times. It is supposed to be easy, and is nowhere to be found." }, {name:"I too could not find it. I think it is missing as well."}], difficulty: $.enums.difficulty.easy, toFind: [{ name: "Rick R." }, { name: "David D."}], foundBy: [{ name: "Mike E." }], hints: [{ name: "Think wet... Very wet..." }] },
-        { id: 6, lat: 44.955, lon: -93.2, name: "Twins Stadium", group: $.enums.cacheGroups.recommended, lastFound: new Date(2013, 2, 17, 5, 0, 0, 0), reportedProblems: [], difficulty: $.enums.difficulty.easy, toFind: [{ name: "Elisa E." }, { name: "Erica E"}], foundBy: [{ name: "Tony S." }, { name: "Logan W." }], hints: [{ name: "Don't look for this one just before a game. You end up getting a lot of funny looks." }, { name: "I kept looking right next to the statue, but that is not where it is." }] }
+        { id: 1, lat: 45.478652, lon: -92.754652, name: "My First GeoCache", group: $.enums.cacheGroups.nearYou, lastFound: new Date(2012, 11, 15, 5, 0, 0, 0), reportedProblems: [], difficulty: $.enums.difficulty.easy, toFind: [{ name: "Mary M." }, { name: "David D." }], foundBy: [{ name: "John D.", date: new Date(2012, 11, 15, 12, 0, 0, 0) }, { name: "Ellen M.", date: new Date(2013, 3, 15, 15, 0, 0, 0) }, { name: "Mike E.", date: new Date(2013, 1, 3, 12, 0, 0, 0) }], hints: [{ name: "Make sure to look closely at all the leaves." }] },
+        { id: 2, lat: 45.578652, lon: -92.654652, name: "By the pond", group: $.enums.cacheGroups.nearYou, lastFound: new Date(2013, 3, 3, 12, 0, 0, 0), reportedProblems: [{ name: "I was not able to find this one. Maybe it is gone?" }], difficulty: $.enums.difficulty.normal, toFind: [{ name: "Lisa L." }, { name: "Brandon B." }], foundBy: [{ name: "John D.", date: new Date(2012, 11, 15, 12, 0, 0, 0) }], hints: [{ name: "This one should probably be a tiny size instead of a small. I was not looking close enough at first." }] },
+        { id: 3, lat: 45.678652, lon: -93.354652, name: "Near the forrest", group: $.enums.cacheGroups.nearYou, lastFound: new Date(2012, 11, 15, 5, 0, 0, 0), reportedProblems: [{ name: "When I found this one, an entire side of the container was broken in." }], difficulty: $.enums.difficulty.hard, toFind: [{ name: "Ryan R." }], foundBy: [{ name: "Zach Q.", date: new Date(2013, 2, 1, 1, 0, 0, 0) }, { name: "Ellorie L.", date: new Date(2013, 2, 17, 12, 0, 0, 0) }, { name: "Josh J.", date: new Date(2013, 4, 7, 12, 0, 0, 0) }, { name: "Quinton T.", date: new Date(2013, 5, 6, 6, 0, 0, 0) }], hints: [{ name: "Look near the trees, but NOT in them." }] },
+        { id: 4, lat: 44.778652, lon: -93.254652, name: "Through the woods", group: $.enums.cacheGroups.nearYou, lastFound: new Date(2012, 10, 23, 5, 0, 0, 0), reportedProblems: [], difficulty: $.enums.difficulty.hard, toFind: [{ name: "Sue S." }, { name: "Eric E." }, { name: "Aaron A." }], foundBy: [{ name: "Ellen M.", date: new Date(2012, 10, 23, 12, 0, 0, 0) }, { name: "Mike E.", date: new Date(2013, 4, 30, 12, 0, 0, 0) }], hints: [{ name: "Going with someone tall makes this one much easier." }] },
+        { id: 5, lat: 44.878652, lon: -93.154652, name: "Prairy day", group: $.enums.cacheGroups.recommended, lastFound: new Date(2013, 3, 6, 20, 0, 0, 0), reportedProblems: [{ name: "This one is clearly missing. I am an experienced cacher and I have searched for it half a dozen times. It is supposed to be easy, and is nowhere to be found." }, { name: "I too could not find it. I think it is missing as well." }], difficulty: $.enums.difficulty.easy, toFind: [{ name: "Rick R." }, { name: "David D." }], foundBy: [{ name: "Mike E.", date: new Date(2012, 11, 15, 12, 0, 0, 0) }], hints: [{ name: "Think wet... Very wet..." }] },
+        { id: 6, lat: 44.955, lon: -93.2, name: "Twins Stadium", group: $.enums.cacheGroups.recommended, lastFound: new Date(2013, 2, 17, 5, 0, 0, 0), reportedProblems: [], difficulty: $.enums.difficulty.easy, toFind: [{ name: "Elisa E." }, { name: "Erica E" }], foundBy: [{ name: "Tony S.", date: new Date(2012, 9, 15, 12, 0, 0, 0) }, { name: "Logan W.", date: new Date(2013, 5, 7, 12, 0, 0, 0) }], hints: [{ name: "Don't look for this one just before a game. You end up getting a lot of funny looks." }, { name: "I kept looking right next to the statue, but that is not where it is." }] }
     ],
 
 
@@ -246,10 +246,25 @@ $.applicationState = {
         });
     },
 
+    setMostRecentFindDate: function() {
+        var mostRecentFind = this.selectedGeocache.foundBy[0];
+        for (var i = 1; i < this.selectedGeocache.foundBy.length; i++) {
+            var currentItem = this.selectedGeocache.foundBy[i];
+
+            if (currentItem.date > mostRecentFind.date) {
+                mostRecentFind = currentItem;
+            }
+        }
+
+        $("#last-found").text(this.formatDate(mostRecentFind.date));
+    },
+
     // Initializes the cache-detail.html page
     initCacheDetail: function () {
         $("#cache-name").text(this.selectedGeocache.name);
-        $("#last-found").text(this.formatDate($.applicationState.selectedGeocache.lastFound));
+
+        this.setMostRecentFindDate();
+
         $("#difficulty").text(this.selectedGeocache.difficulty.name);
         $("#found-by-count").text(this.selectedGeocache.foundBy.length);
         $("#hints-count").text(this.selectedGeocache.hints.length);
@@ -258,15 +273,16 @@ $.applicationState = {
 
         $("#cache-found-button").click(function () {
             // Add the current user to the collection of people who have found this cache.
-            $.applicationState.selectedGeocache.foundBy.push({ name: $.applicationState.userName });
+            $.applicationState.selectedGeocache.foundBy.push({ name: $.applicationState.userName, date: new Date() });
 
             // Update the found-by count on this page.
             $("#found-by-count").text($.applicationState.selectedGeocache.foundBy.length);
+            $.applicationState.setMostRecentFindDate();
         });
     },
 
     initFoundBy: function () {
-        this.addItems($("#found-by-collection"), this.selectedGeocache.foundBy);
+        this.addItemsWithNameAndDate($("#found-by-collection"), this.selectedGeocache.foundBy);
         $("#back-button-text").text(this.selectedGeocache.name);
     },
 
@@ -380,6 +396,18 @@ $.applicationState = {
     },
 
     // Adds a collection of items to a list view. These items are NOT selectable.
+    addItemsWithNameAndDate: function (collectionView, items) {
+        // Clear out any existing child nodes.
+        collectionView.empty();
+
+        // Add each item as a child node of the collection view.
+        $.each(items, function (index, item) {
+            var template = '<li data-theme="c">' + item.name + '<span style="float:right">' + $.applicationState.formatDate(item.date) + '</span></li>';
+            collectionView.append(template).listview('refresh');
+        });
+    },
+
+    // Adds a collection of items to a list view. These items are NOT selectable.
     addItems: function (collectionView, items) {
         // Clear out any existing child nodes.
         collectionView.empty();
@@ -393,7 +421,7 @@ $.applicationState = {
 
     // Applys a display format to a date object
     formatDate: function (date) {
-        return date.getMonth() + '/' + date.getDate() + '/' + date.getFullYear();
+        return date.getMonth() + 1 + '/' + date.getDate() + '/' + date.getFullYear();
     },
 
     // Begins tracking a user's geo-location.
