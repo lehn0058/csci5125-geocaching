@@ -222,7 +222,7 @@ $.applicationState = {
             $.applicationState.selectedRegReservation.registerNum = newRegisterNum;            
             // Refresh the detail
             $("#register-count").text($.applicationState.selectedRegReservation.registerNum);
-            $("#register-Reg-button").disable();
+            this.disabled = true;
         });
     },
 
