@@ -88,6 +88,10 @@ $.applicationState = {
             $.applicationState.initRegReservationDetail();
         });
 
+	$('#register-detail').live('pageinit', function (event) {
+            $.applicationState.initRegisterDetail();
+        });
+        
         $('#sponsored-equipments').live('pageinit', function (event) {
             $.applicationState.initSpEquipments();
         });
@@ -225,6 +229,10 @@ $.applicationState = {
             $("#register-count").text($.applicationState.selectedRegReservation.registerNum);
             //document.getElementById("register-Reg-button").disabled=true;
         });
+    },
+
+    initRegisterDetail: function (){
+	 $("#back-button-text").text("Event by " + this.selectedGCReservation.organizer);
     },
 
     initSpEquipments: function () {
