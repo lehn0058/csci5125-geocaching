@@ -255,6 +255,14 @@ $.applicationState = {
         $("#hints-count").text(this.selectedGeocache.hints.length);
         $("#to-find-count").text(this.selectedGeocache.toFind.length);
         $("#report-problem-count").text(this.selectedGeocache.reportedProblems.length);
+
+        $("#cache-found-button").click(function () {
+            // Add the current user to the collection of people who have found this cache.
+            $.applicationState.selectedGeocache.foundBy.push({ name: $.applicationState.userName });
+
+            // Update the found-by count on this page.
+            $("#found-by-count").text($.applicationState.selectedGeocache.foundBy.length);
+        });
     },
 
     initFoundBy: function () {
