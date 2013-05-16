@@ -200,7 +200,7 @@ $.applicationState = {
         $("#sponsored-food-count").text(this.selectedGCReservation.foodSupport.length);
         $("#contact-info").text(this.selectedGCReservation.contact);
         $("#register-count").text(this.selectedGCReservation.registerNum);
-        $("#register").text("REGISTER!");
+        $("#register").text("REGISTER NOW!");
         
     },
 
