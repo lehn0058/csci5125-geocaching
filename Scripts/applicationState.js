@@ -225,6 +225,12 @@ $.applicationState = {
 
     initRegisterDetail: function () {
 	$("#back-button-text").text("Event by " + $.applicationState.selectedGCReservation.organizer);
+	
+	
+         $("#confirm-button").click(function () {
+            alert("Register Succeeded");
+        });
+    
     },
 
     initSpEquipments: function () {
