@@ -232,7 +232,7 @@ $.applicationState = {
     },
 
     initRegisterDetail: function () {
-	$("#back-button-text").text("Event by " + this.selectedGCReservation.organizer);
+	$("#back-button-text").text("Event by " + $.applicationState.selectedGCReservation.organizer);
     },
 
     initSpEquipments: function () {
