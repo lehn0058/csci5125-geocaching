@@ -200,10 +200,11 @@ $.applicationState = {
         
         $("#register-GC-button").click(function () {
             var newRegisterNum = parseInt($("#register-count").text()) + 1;
-            alert("Register Succeeded");
             $.applicationState.selectedGCReservation.registerNum = newRegisterNum;            
             // Refresh the detail
             $("#register-count").text($.applicationState.selectedGCReservation.registerNum);
+            window.location.href="register-detail.html";
+            
         });
     },
 
