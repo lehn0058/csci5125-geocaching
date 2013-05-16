@@ -201,7 +201,7 @@ $.applicationState = {
         $("#register-GC-button").click(function () {
             var newRegisterNum = parseInt($("#register-count").text()) + 1;
             alert(newRegisterNum);
-            $.applicationState.selectedGCReservation.registerNum = newRegisterNum.text();
+            $.applicationState.selectedGCReservation.registerNum = newRegisterNum;
             alert("Register Succeeded");
             // Refresh the detail
             $("#register-count").text(this.selectedGCReservation.registerNum);
