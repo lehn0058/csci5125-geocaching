@@ -231,8 +231,8 @@ $.applicationState = {
         });
     },
 
-    initRegisterDetail: function (){
-	 $("#back-button-text").text("Event by " + this.selectedGCReservation.organizer);
+    initRegisterDetail: function () {
+	$("#back-button-text").text("Event by " + this.selectedGCReservation.organizer);
     },
 
     initSpEquipments: function () {
