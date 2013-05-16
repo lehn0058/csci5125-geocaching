@@ -17,22 +17,22 @@
     <body>
         <!-- Home -->
         <div data-role="page" id="register-detail">
-            <div id="cache-detail-header" data-theme="a" data-role="header">
-                <a data-role="button" data-direction="reverse" data-transition="slide" href="cache-detail.html" data-icon="arrow-l" data-iconpos="left" class="ui-btn-left">
-                    <span id="back-button-text">Cache name goes here!</span>
+            <div id="register-detail-header" data-theme="a" data-role="header">
+                <a data-role="button" data-direction="reverse" data-transition="slide" href="gcReservation-detail.html" data-icon="arrow-l" data-iconpos="left" class="ui-btn-left">
+                    <span id="back-button-text">register detail goes here!</span>
                 </a>
                 <h3>
-                    Hints
+                    Registration Details
                 </h3>
             </div>
             <div data-role="content">
-                <ul id="hints-collection" data-role="listview" data-divider-theme="b" data-inset="true">
-                </ul>
+                <input type="radio" name="radiobutton" value="radiobutton" checked> GPS Equipments sponsor is required </input> 
+                <input type="radio" name="radiobutton" value="radiobutton"> GPS Equipments sponsor is NOT required </input> 
 
                 <div data-role="fieldcontain">
-                    <textarea style="width:100%" id="add-hint-text-area" placeholder="Hint text..."></textarea>
+                    <textarea style="width:100%" id="add-hint-text-area" placeholder="Addtional Requests (please specify)"></textarea>
                 </div>
-                <a data-role="button" id="add-hint-button">Add Hint</a>
+                <a data-role="button" id="confirm-button">Confirm</a>
             </div>
         </div>
     </body>
