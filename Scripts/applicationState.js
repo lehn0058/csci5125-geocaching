@@ -200,16 +200,8 @@ $.applicationState = {
         $("#sponsored-food-count").text(this.selectedGCReservation.foodSupport.length);
         $("#contact-info").text(this.selectedGCReservation.contact);
         $("#register-count").text(this.selectedGCReservation.registerNum);
+        $("#register").text("REGISTER!");
         
-        
-        $("#register-GC-button").click(function () {
-            var newRegisterNum = parseInt($("#register-count").text()) + 1;
-            $.applicationState.selectedGCReservation.registerNum = newRegisterNum;            
-            // Refresh the detail
-            $("#register-count").text($.applicationState.selectedGCReservation.registerNum);
-            window.location.href="register-detail.html";
-            
-        });
     },
 
     // Initializes the regReservation-detail.html page
